@@ -30,7 +30,6 @@ body{
     position: relative;
     margin-top: 10%;
     margin-left: 1rem;
-    //color: #0e0e0e;
     color: #4e4e4e;
     letter-spacing: 2px;
     font-size: 3em;
@@ -46,7 +45,6 @@ body{
     margin-top: 1rem;
     margin-left: 1rem;
     font-size: 1.5em;
-    //color: #222;
     color: #4e4e4e;
     padding: 0.5rem 1rem;
     margin-right: auto;
@@ -246,22 +244,65 @@ body{
     min-width: 300px;
 }
 .project_box{
-    width: 30%;
-    min-width: 250px;
+    width: 40%;
+    min-width: 280px;
     max-width: 340px;
-    height: 180px;
     border: 1px solid #eaeaea;
     margin: 2rem 1px;
     border-radius: 5px;
-    background-color: #eaeaea;
+    overflow: hidden;
+    box-shadow: 0px 6px 11px 1px #c1c1c1;
+    max-height: 460px;
 }
-
+.imgs_project_box{
+    position: relative;
+    height: 240px;
+    background-color: #fff;
+    border-bottom: 1px solid #eaeaea;
+    overflow: hidden; 
+}
+.project_box_title{
+    padding: 1rem 0.5rem;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    border-bottom: 1px solid #eaeaea;
+}
+.project_box_description{
+    border-bottom: 1px solid #eaeaea;
+    padding: 0.5rem;
+    text-align: center;
+    color: #1f1f1f;
+}
+.project_box_call_to_action_btn{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0.5rem;
+}
 #my_projects_btns{
     display: flex;
     flex-direction: row;
     justify-content: center;
     padding: 0 2rem;
 }
+
+.aws-btn {
+    --slider-height-percentage: 100% !important;
+    --slider-transition-duration: 575ms !important;
+    --organic-arrow-thickness: 3px !important;
+    --organic-arrow-border-radius: 3px !important;
+    --organic-arrow-height: 25px !important;
+    --organic-arrow-color: #fff !important;
+    --control-button-width: 10% !important;
+    --control-button-height: 25% !important;
+    --control-button-background: #000000a1 !important;
+    --control-bullet-color: #6a6a6a !important;
+    --control-bullet-active-color: #6a6a6a !important;
+    --loader-bar-color: #419aff !important;
+    --loader-bar-height: 6px !important;
+}
+
 
 @-webkit-keyframes sdb10 {
     0% {
