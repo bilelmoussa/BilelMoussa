@@ -9,6 +9,13 @@ body{
 #welcome_section{
     position: relative;
 }
+
+#welcome_svg_container{
+    width: 100%;
+    max-width: 2500px;
+    margin: 0 0 0 auto;
+}
+
 #svg_background{
     z-index: -2;
     position: relative;
@@ -25,6 +32,7 @@ body{
     padding: 1rem;
     display: flex;
     flex-direction: column;
+    max-width: 2500px;
 }
 #welcome_header{
     position: relative;
@@ -90,7 +98,7 @@ body{
     z-index: 2;
     text-decoration: none;
     padding-top: 60px;
-    color: #000000b8;
+    color: #4e4e4e;
     text-transform: capitalize;
     letter-spacing: 1px;
     font-size: 18px;
@@ -141,6 +149,9 @@ body{
 #about_me_section{
     margin-top: 1rem;
     overflow: hidden;
+    max-width: 2500px;
+    margin-left: auto;
+    margin-right: auto;
 }
 #about_container{
     display: flex;
@@ -160,7 +171,7 @@ body{
 #about_me_img{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-end;
 }
 #about_me_content{
     display: flex;
@@ -188,6 +199,9 @@ body{
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    max-width: 2500px;
+    margin-left: auto;
+    margin-right: auto;
 }
 #my_projects_container{
     display: flex;
@@ -219,11 +233,12 @@ body{
 #my_projects_svg{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-end;
 }
 #my_projects_svg img{
     width: 100%;
     margin-top: 4rem;
+    max-width: 550px;
 }
 #my_projects_boxes{
     display: flex;
@@ -308,6 +323,68 @@ body{
 }
 
 
+/*------------------ Skills Section -------------------------*/
+
+#skills_section{
+    display: flex;
+    flex-direction: column;
+    margin-top: 5rem;
+    max-width: 2500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#skills_header{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 1rem;
+    justify-content: center;
+}
+#skills_content, #skills_illustration{
+    width: 45%;
+    margin: 1rem 0;
+}
+#skills_content{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+#skills_content h1{
+    color: #72b6ff;
+    text-transform: capitalize;
+    margin-bottom: 2rem;
+}
+#skills_content p{
+    font-size: 18px;
+    margin-bottom: 2rem;
+    line-height: 2.2rem;
+    font-weight: 500;
+}
+#skills_illustration{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+#skills_illustration #skill_svg {
+    width: 100%;
+    margin-top: 4rem;
+    max-width: 300px;
+}
+
+.skills_animation{
+    -webkit-animation: skills_anim 3s ease-in-out infinite;
+    animation: skills_anim 3s ease-in-out infinite;
+}
+
+@keyframes skills_anim{
+    0%{
+        transform: translateY(0);
+    }
+    50%{
+        transform: translateY(70px);
+    }
+}
+
 @-webkit-keyframes sdb10 {
     0% {
       -webkit-transform: translate(0, 0);
@@ -386,14 +463,14 @@ body{
 }
 
 @media(max-width: 770px){
-    #about_container, #my_projects_container{
+    #about_container, #my_projects_container, #skills_header{
         flex-direction: column;
         align-items: center;
     }
-    #about_me_content, #my_projects_content{
+    #about_me_content, #my_projects_content, #skills_content{
         width: 90%;
     }
-    #about_me_img, #my_projects_svg{
+    #about_me_img, #my_projects_svg, #skills_illustration{
         width:90%;
         justify-content: center;
     }
@@ -401,13 +478,13 @@ body{
         margin-top: 0;
         height: 400px;
     }
-    #my_projects_svg img{
+    #my_projects_svg img, #skills_illustration #skill_svg{
         margin-top: 0;  
     }
-    #about_me_content h1, #my_projects_content h1{
+    #about_me_content h1, #my_projects_content h1, #skills_content h1{
         margin-bottom: 1rem;
     }
-    #about_me_content p, #my_projects_content p{
+    #about_me_content p, #my_projects_content p, #skills_content p{
         font-size: 16px;
         margin-bottom: 1rem;
         line-height: 1.8rem;

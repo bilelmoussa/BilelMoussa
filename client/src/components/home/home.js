@@ -7,6 +7,8 @@ import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import AwesomeSlider from 'react-awesome-slider';
 import AwesomeSliderStyles from 'react-awesome-slider/src/styles';
+import SkillSvg from '../svg_img/skill_svg';
+import ScrollableAnchor from 'react-scrollable-anchor'
 
 const Styles = theme => ({
     button: {
@@ -75,20 +77,20 @@ const Styles = theme => ({
 
 class Home extends Component {
 
-    handleScrollToStats = (e) => {
-        e.preventDefault();
-        window.scrollTo({
-            top: 900,
-            behavior: 'smooth'
-        })
-   }
+    componentDidMount(){
 
+    }
+    
     render(){
         const { classes } = this.props;
         return(
             <div>
                 <div id="welcome_section">
-                        <img id="svg_background" alt="" src={Img} />
+
+                        <div id="welcome_svg_container">
+                            <img id="svg_background" alt="" src={Img} />
+                        </div>
+        
                         <div id="welcome_section_content">
                             <h1 id="welcome_header">Hi I'm Bilel Moussa</h1> 
                             <p id="welcome_description">A Web <b>Developer</b> & Web <b>Designer</b></p>
@@ -98,29 +100,30 @@ class Home extends Component {
                             </div>
                         </div>
                         <div id="scroll_down">
-                            <a href="#thanks" onClick={this.handleScrollToStats}><span></span>Scroll</a>
+                            <a href="#about_me_section_href"><span></span>Scroll</a>
                         </div>           
                 </div>
-                
-                <div id="about_me_section">
-                    <div id="about_container">
-                        <div id="about_me_content">
-                            <h1>About me</h1>
-                            <p>
-                            Hello Thank you for visiting my website. I'm a web developer / designer with an experience of 3 years i'm seeking for reputation rather than money and my primary goal is Client satisfaction.
-                            My aim has always been to produce website that work best for clients business and look beautiful and professional .
-                            Thus, if you need quality Website or any other web work  It is a pleasure for me to work with you and i hope we accomplish a high quality with the lowest price available. Feel free to contact me !
-                            </p>
-                            <div>
-                                <Button variant="contained" className={classes.button}>Contact me</Button>
+
+                <ScrollableAnchor  id={'about_me_section_href'}>
+                    <div id="about_me_section">
+                        <div id="about_container">
+                            <div id="about_me_content">
+                                <h1>About me</h1>
+                                <p>
+                                Hello Thank you for visiting my website. I'm a web developer / designer with an experience of 3 years i'm seeking for reputation rather than money and my primary goal is Client satisfaction.
+                                My aim has always been to produce website that work best for clients business and look beautiful and professional .
+                                Thus, if you need quality Website or any other web work  It is a pleasure for me to work with you and i hope we accomplish a high quality with the lowest price available. Feel free to contact me !
+                                </p>
+                                <div>
+                                    <Button variant="contained" className={classes.button}>Contact me</Button>
+                                </div>
                             </div>
-                        </div>
-                        <div id="about_me_img">
-                            <img alt="" src={About_me_img} />
-                        </div>
-                    </div> 
-                </div>
-                
+                            <div id="about_me_img">
+                                <img alt="" src={About_me_img} />
+                            </div>
+                        </div> 
+                    </div>
+                </ScrollableAnchor>
                 <div id="my_projects_section">
 
                     <div id="my_projects_container">
@@ -239,6 +242,21 @@ class Home extends Component {
                         <Button variant="contained" className={classes.more_button}>More Projects</Button>
                     </div>
 
+                </div>
+
+                <div id="skills_section">
+                    <div id="skills_header">
+                        <div id="skills_content">
+                            <h1>Skills</h1>
+                            <p>I have diffrents technologies in use, but i'm more skilled in JS than others .</p>
+                        </div>
+                        <div id="skills_illustration">
+                            <SkillSvg id="skill_svg" />
+                        </div>
+                    </div>
+                    <div id="skills_lists">
+
+                    </div>
                 </div>
 
             </div>   
