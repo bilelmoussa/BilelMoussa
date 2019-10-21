@@ -1,5 +1,7 @@
 body{
-    height: 4000px;
+    height: 8000px;
+    background-color: #ffffff;
+
 }
 
 
@@ -332,6 +334,7 @@ body{
     max-width: 2500px;
     margin-left: auto;
     margin-right: auto;
+    background-color: #f9f9f9;
 }
 #skills_header{
     display: flex;
@@ -370,13 +373,111 @@ body{
     margin-top: 4rem;
     max-width: 300px;
 }
-
 .skills_animation{
     -webkit-animation: skills_anim 3s ease-in-out infinite;
     animation: skills_anim 3s ease-in-out infinite;
 }
+#skills_lists{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+.skills_cat{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: 0 auto;
+    overflow: hidden;
+    margin-top: 0.5rem;
+    margin-bottom: 2.5rem;
+}
+
+
+/* --------------- Skills Circle Chart ------------------ */
+
+
+.card  {
+    margin: 10px;
+    background-color: #2196f3 !important;
+    color: #ffffff !important;
+    height: 270px;
+  }
+  
+.circular-chart {
+    display: block;
+    margin: 10px auto;
+    max-width: 85%;
+    max-height: 250px;
+    padding: 10px 0;
+}
+    
+.circle-bg {
+    fill: none;
+    stroke: #88caff;
+    stroke-width: 3.8;
+}
+    
+.circle {
+    fill: none;
+    stroke-width: 2.8;
+    stroke-linecap: round;
+   // animation: progress 4s linear;
+}
+  
+.single-chart{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    justify-content: space-around;
+}
+  
+.SingleChartTitle{
+    color: #fff !important;
+    letter-spacing: 4px !important;
+    margin: 30px 10px !important;
+    text-transform: uppercase;
+    font-size: 1rem !important;
+    font-weight: bold !important;
+}
+
+@keyframes progress {
+    0% {
+      stroke-dasharray: 0 100;
+    }
+}
+  
+.circular-chart.white .circle {
+    stroke: #fff;
+}
+
+.percentage {
+    font-family: sans-serif;
+    font-size: 0.4em;
+    text-anchor: middle;
+}
+
+.percentage.white{
+    fill: #fff;
+}
+
+.Card_item{
+    width: 200px !important;
+    margin: 20px 30px !important;
+    text-align: center;
+}
 
 @keyframes skills_anim{
+    0%{
+        transform: translateY(0);
+    }
+    50%{
+        transform: translateY(70px);
+    }
+}
+
+@-webkit-keyframes skills_anim{
     0%{
         transform: translateY(0);
     }

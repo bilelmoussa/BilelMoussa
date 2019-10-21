@@ -8,7 +8,9 @@ import PropTypes from 'prop-types';
 import AwesomeSlider from 'react-awesome-slider';
 import AwesomeSliderStyles from 'react-awesome-slider/src/styles';
 import SkillSvg from '../svg_img/skill_svg';
-import ScrollableAnchor from 'react-scrollable-anchor'
+import ScrollableAnchor from 'react-scrollable-anchor';
+import SkillChart from './home-components/skill-chart';
+import Card from '@material-ui/core/Card';
 
 const Styles = theme => ({
     button: {
@@ -72,10 +74,50 @@ const Styles = theme => ({
     input: {
         display: 'none',
     },
+    pog_bar:{
+        width: "50%",
+        maxWidth: 500,
+        minWidth: 200,
+        height: 16,
+        margin: "0 1rem",
+        marginTop: 5,
+    },
+    pog_bar_color:{
+        backgroundColor: "#72b6ff"
+    },
+    card:{
+        display: "flex",
+        flexDirection: "column",
+        margin: "2rem 0"
+    },
+    card_content:{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-around",
+        flexWrap: "wrap",
+    },
+    card_header:{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
+        textAlign: "center",
+        margin: "2rem 0",
+        color: "#4a4a4a"
+    }
 });
 
 
 class Home extends Component {
+    constructor(){
+        super();
+        this.state = {
+            js_value: 80,
+            html_value: 99,
+            css_value: 80,
+            nodejs_value: 60,
+            php_value: 40,
+        }
+    }
 
     componentDidMount(){
 
@@ -255,9 +297,34 @@ class Home extends Component {
                         </div>
                     </div>
                     <div id="skills_lists">
-
+                        <div className="skills_cat">
+                            <Card className={classes.card}>
+                                <div className={classes.card_header}>
+                                    <h1>Front-End Technologies</h1>
+                                </div>
+                                <div className={classes.card_content}> 
+                                    <SkillChart title={"JavaScript"} value={80} />
+                                    <SkillChart title={"HTML"} value={95} />
+                                    <SkillChart title={"css"} value={85} />
+                                    <SkillChart title={"scss"} value={60} />
+                                </div>
+                            </Card> 
+                            <Card className={classes.card}>
+                                <div className={classes.card_header}>
+                                    <h1>Back-End Technologies And Others</h1>
+                                </div>
+                                <div className={classes.card_content}> 
+                                    <SkillChart title={"NodeJS"} value={65} />
+                                    <SkillChart title={"PHP"} value={40} />
+                                    <SkillChart title={"Wordpress"} value={50} />
+                                    <SkillChart title={"Git & Github"} value={40} />
+                                </div>
+                            </Card> 
+                        </div>
                     </div>
                 </div>
+
+                
 
             </div>   
         );
