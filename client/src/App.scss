@@ -468,6 +468,81 @@ body{
     text-align: center;
 }
 
+
+
+/* ------------------- Contact Section  ------------------------- */
+
+
+#contact_section{
+    display: flex;
+    flex-direction: column;
+    margin-top: 5rem;
+    max-width: 2500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#contact_container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 1rem;
+    justify-content: center;
+}
+
+#contact_content, #contact_svg{
+    width: 45%;
+    margin: 1rem 0;
+}
+
+#contact_content{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#contact_header h1{
+    color: #72b6ff;
+    text-transform: capitalize;
+    margin-bottom: 2rem;
+}
+
+#contact_svg{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+#contact_svg img{
+    width: 100%;
+    margin-top: 4rem;
+    max-width: 400px;
+}
+
+.formControll{
+    display: flex;
+    margin: 20px 0;
+    flex-direction: column;
+    width: 50%;
+    min-width: 250px;
+    max-width: 400px;
+}
+
+
+.react-phone-number-input__icon{
+    width: 40px !important;
+    height: 30px !important; 
+}
+
+.react-phone-number-input__input:focus{
+    border-color: #303f9f !important;
+}
+
+.SelectPhone{
+    padding-right: 0 !important
+}
+
+
 @keyframes skills_anim{
     0%{
         transform: translateY(0);
@@ -564,11 +639,11 @@ body{
 }
 
 @media(max-width: 770px){
-    #about_container, #my_projects_container, #skills_header{
+    #about_container, #my_projects_container, #skills_header, #contact_container{
         flex-direction: column;
         align-items: center;
     }
-    #about_me_content, #my_projects_content, #skills_content{
+    #about_me_content, #my_projects_content, #skills_content, #contact_content{
         width: 90%;
     }
     #about_me_img, #my_projects_svg, #skills_illustration{
@@ -592,6 +667,9 @@ body{
     }
     #my_projects_boxes{
         padding-bottom: 0;
+    }
+    .formControll{
+        margin: 20px auto;
     }
 }
 

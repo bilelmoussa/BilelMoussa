@@ -11,6 +11,7 @@ import SkillSvg from '../svg_img/skill_svg';
 import ScrollableAnchor from 'react-scrollable-anchor';
 import SkillChart from './home-components/skill-chart';
 import Card from '@material-ui/core/Card';
+import Contact from './home-components/contact';
 
 const Styles = theme => ({
     button: {
@@ -324,6 +325,7 @@ class Home extends Component {
                     </div>
                 </div>
 
+                <Contact />
                 
 
             </div>   
