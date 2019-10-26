@@ -1,5 +1,5 @@
 body{
-    height: 8000px;
+    //height: 8000px;
     background-color: #ffffff;
 
 }
@@ -511,14 +511,14 @@ body{
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    min-width: 320px;
 }
 
 #contact_svg img{
+    display: block;
     width: 100%;
     margin-top: 4rem;
     max-width: 400px;
-    min-width: 320px;
+    min-width: 280px;
 }
 
 .formControll{
@@ -675,6 +675,16 @@ body{
     }
     #contact_container{
         padding: 0;
+    }
+    #contact_svg{
+        display: block;
+    }
+    #contact_svg, #contact_svg img{
+        width: 100%;
+    }
+    #contact_svg img{
+        max-width: 500px;
+        margin: 0 auto;
     }
 }
 
