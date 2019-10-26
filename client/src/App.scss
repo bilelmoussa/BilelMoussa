@@ -511,6 +511,7 @@ body{
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+    min-width: 300px;
 }
 
 #contact_svg img{

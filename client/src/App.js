@@ -6,6 +6,8 @@ import Dashboard from './components/dashboard/dashboard';
 import Login from './components/login/login';
 import Register from './components/register/register';
 import PageNotFound from './components/404/page_not_found';
+import contact from './components/contact/contact';
+import projects from './components/projects/projects';
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
           <Route path="/dashboard" component={Dashboard} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
+          <Route exact path="/contact" component={contact} />
+          <Route exact path="/projects" component={projects} />
           <Route component={PageNotFound} />
         </Switch>
       </Router>

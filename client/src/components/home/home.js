@@ -4,6 +4,7 @@ import About_me_img from '../../static/img/about_me.jpg';
 import My_projects_svg from '../../static/img/my_projects.svg'
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AwesomeSlider from 'react-awesome-slider';
 import AwesomeSliderStyles from 'react-awesome-slider/src/styles';
@@ -117,15 +118,110 @@ class Home extends Component {
             css_value: 80,
             nodejs_value: 60,
             php_value: 40,
-        }
+            js_scroll_time: false,
+            html_scroll_time: false,
+            css_scroll_time: false,
+            scss_scroll_time: false,
+            node_scroll_time: false,
+            php_scroll_time: false,
+            wordpress_scroll_time: false,
+            git_github_scroll_time: false
+        };
+        this.handleScroll = this.handleScroll.bind(this);
+        this.handleLoad = this.handleLoad.bind(this);
+
     }
+
 
     componentDidMount(){
-
+        window.addEventListener('load', this.handleLoad);
     }
-    
+
+    handleLoad(){
+        this.skills_animation();
+        window.addEventListener('scroll', this.handleScroll);
+    }
+
+    componentWillUnmount(){
+        window.removeEventListener('scroll', this.handleScroll);
+    }
+
+    handleScroll(){
+        this.skills_animation();
+    }
+
+    skills_animation(){
+        //js
+        let JavaScript = document.getElementById("JavaScript");
+        let js_oTOp = JavaScript.offsetTop - window.innerHeight;
+        
+        if(window.pageYOffset > js_oTOp){
+            this.setState({js_scroll_time: true});
+        }
+
+        //html
+        let Html = document.getElementById("HTML");
+        let html_oTOp = Html.offsetTop - window.innerHeight;
+
+        if(window.pageYOffset > html_oTOp){
+            this.setState({html_scroll_time: true});
+        }
+
+        //css
+        let css = document.getElementById("css");
+        let css_oTOp = css.offsetTop - window.innerHeight;
+
+        if(window.pageYOffset > css_oTOp ){
+            this.setState({css_scroll_time: true});
+        }
+
+        //scss
+        let scss = document.getElementById("scss");
+        let scss_oTOp = scss.offsetTop - window.innerHeight;
+
+        if(window.pageYOffset > scss_oTOp ){
+            this.setState({scss_scroll_time: true});
+        }
+
+
+        //node
+        let node = document.getElementById("NodeJS");
+        let node_oTOp = node.offsetTop - window.innerHeight;
+
+        if(window.pageYOffset > node_oTOp ){
+            this.setState({node_scroll_time: true});
+        }
+        
+        //Php
+        let php = document.getElementById("PHP");
+        let php_oTOp = php.offsetTop - window.innerHeight;
+
+        if(window.pageYOffset > php_oTOp ){
+            this.setState({php_scroll_time: true});
+        }
+        
+        //Wordpress
+        let wordpress = document.getElementById("Wordpress");
+        let wordpress_oTOp = wordpress.offsetTop - window.innerHeight;
+
+        if(window.pageYOffset > wordpress_oTOp ){
+            this.setState({wordpress_scroll_time: true});
+        }
+        
+        //Git & Github
+        let git_github = document.getElementById("Git_Github");
+        let git_github_oTOp = git_github.offsetTop - window.innerHeight;
+
+        if(window.pageYOffset > git_github_oTOp ){
+            this.setState({git_github_scroll_time: true});
+        }        
+    }
+
+
+
     render(){
         const { classes } = this.props;
+
         return(
             <div>
                 <div id="welcome_section">
@@ -138,8 +234,8 @@ class Home extends Component {
                             <h1 id="welcome_header">Hi I'm Bilel Moussa</h1> 
                             <p id="welcome_description">A Web <b>Developer</b> & Web <b>Designer</b></p>
                             <div id="welcome_btns_container">
-                                <Button variant="contained" className={classes.button}>Projects</Button>
-                                <Button variant="contained" className={classes.button}>Contact Me</Button>
+                                <Button variant="contained" className={classes.button} component={Link} to={`/projects`}>Projects</Button>
+                                <Button variant="contained" className={classes.button} component={Link} to={`/contact`}>Contact Me</Button>
                             </div>
                         </div>
                         <div id="scroll_down">
@@ -158,7 +254,7 @@ class Home extends Component {
                                 Thus, if you need quality Website or any other web work  It is a pleasure for me to work with you and i hope we accomplish a high quality with the lowest price available. Feel free to contact me !
                                 </p>
                                 <div>
-                                    <Button variant="contained" className={classes.button}>Contact me</Button>
+                                    <Button variant="contained" className={classes.button} component={Link} to={`/contact`} >Contact me</Button>
                                 </div>
                             </div>
                             <div id="about_me_img">
@@ -200,8 +296,8 @@ class Home extends Component {
                                     KPI App is a Web Application for 3D Printing companies .
                                     </div>
                                     <div className="project_box_call_to_action_btn">
-                                        <Button variant="contained" className={classes.box_button}>Live</Button>
-                                        <Button variant="contained" className={classes.box_button}>Code</Button>
+                                        <Button variant="contained" className={classes.box_button} href="https://kpi-application.herokuapp.com/" target="_blank">Live</Button>
+                                        <Button variant="contained" className={classes.box_button} href="https://github.com/bilelmoussa/kpi-app" target="_blank">Code</Button>
                                         <Button variant="contained" className={classes.box_button}>More</Button>
                                     </div>
                                 </div>
@@ -221,8 +317,8 @@ class Home extends Component {
                                     This is a Landing Page Website, i used html/css and JavaScript(jQuery) for the design.
                                     </div>
                                     <div className="project_box_call_to_action_btn">
-                                        <Button variant="contained" className={classes.box_button}>Live</Button>
-                                        <Button variant="contained" className={classes.box_button}>Code</Button>
+                                        <Button variant="contained" className={classes.box_button} href="https://bilelmoussa.github.io/landsafe/" target="_blank">Live</Button>
+                                        <Button variant="contained" className={classes.box_button} href="https://github.com/bilelmoussa/landsafe" target="_blank">Code</Button>
                                         <Button variant="contained" className={classes.box_button}>More</Button>
                                     </div>
                                 </div>
@@ -248,8 +344,8 @@ class Home extends Component {
                                         E-commerce website developed with Mern stack . 
                                     </div>
                                     <div className="project_box_call_to_action_btn">
-                                        <Button variant="contained" className={classes.box_button}>Live</Button>
-                                        <Button variant="contained" className={classes.box_button}>Code</Button>
+                                        <Button variant="contained" className={classes.box_button} href="https://nebula-shop.000webhostapp.com/" target="_blank">Live</Button>
+                                        <Button variant="contained" className={classes.box_button} href="https://github.com/bilelmoussa/BrightCapella" target="_blank">Code</Button>
                                         <Button variant="contained" className={classes.box_button}>More</Button>
                                     </div>
                                 </div>
@@ -270,8 +366,8 @@ class Home extends Component {
                                         E-commerce website developed with wordpress / woocommerce and my custom Theme . 
                                     </div>
                                     <div className="project_box_call_to_action_btn">
-                                        <Button variant="contained" className={classes.box_button}>Live</Button>
-                                        <Button variant="contained" className={classes.box_button}>Code</Button>
+                                        <Button variant="contained" className={classes.box_button} href="https://bilelmoussa.github.io/elite4you/" target="_blank">Live</Button>
+                                        <Button variant="contained" className={classes.box_button} href="https://github.com/bilelmoussa/elite4you" target="_blank">Code</Button>
                                         <Button variant="contained" className={classes.box_button}>More</Button>
                                     </div>
                                 </div>
@@ -282,7 +378,7 @@ class Home extends Component {
                     </div>
 
                     <div id="my_projects_btns">
-                        <Button variant="contained" className={classes.more_button}>More Projects</Button>
+                        <Button variant="contained" className={classes.more_button} component={Link} to={`/projects`} >More Projects</Button>
                     </div>
 
                 </div>
@@ -304,10 +400,10 @@ class Home extends Component {
                                     <h1>Front-End Technologies</h1>
                                 </div>
                                 <div className={classes.card_content}> 
-                                    <SkillChart title={"JavaScript"} value={80} />
-                                    <SkillChart title={"HTML"} value={95} />
-                                    <SkillChart title={"css"} value={85} />
-                                    <SkillChart title={"scss"} value={60} />
+                                    <SkillChart scrolltime={this.state.js_scroll_time} title={"JavaScript"} value={80} id={"JavaScript"}/>
+                                    <SkillChart scrolltime={this.state.html_scroll_time} title={"HTML"} value={95} id={"HTML"}/>
+                                    <SkillChart scrolltime={this.state.css_scroll_time} title={"css"} value={85} id={"css"}/>
+                                    <SkillChart scrolltime={this.state.scss_scroll_time} title={"scss"} value={60} id={"scss"}/>
                                 </div>
                             </Card> 
                             <Card className={classes.card}>
@@ -315,10 +411,10 @@ class Home extends Component {
                                     <h1>Back-End Technologies And Others</h1>
                                 </div>
                                 <div className={classes.card_content}> 
-                                    <SkillChart title={"NodeJS"} value={65} />
-                                    <SkillChart title={"PHP"} value={40} />
-                                    <SkillChart title={"Wordpress"} value={50} />
-                                    <SkillChart title={"Git & Github"} value={40} />
+                                    <SkillChart scrolltime={this.state.node_scroll_time} title={"NodeJS"} value={65} id={"NodeJS"}/>
+                                    <SkillChart scrolltime={this.state.php_scroll_time} title={"PHP"} value={40} id={"PHP"}/>
+                                    <SkillChart scrolltime={this.state.wordpress_scroll_time} title={"Wordpress"} value={50} id={"Wordpress"}/>
+                                    <SkillChart scrolltime={this.state.git_github_scroll_time} title={"Git & Github"} value={40} id={"Git_Github"}/>
                                 </div>
                             </Card> 
                         </div>

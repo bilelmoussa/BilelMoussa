@@ -17,21 +17,37 @@ class SkillChart extends Component {
     }
 
     componentDidMount(){
-        if(this.props.value){
-            setTimeout(() => {
-                this.setState({
-                    chart_val: this.props.value,
-                    animation: "progress 3s linear"
-                })
-            }, 1000);
+            if(this.props.value){
+                if(this.props.scrolltime){
+                    setTimeout(() => {
+                        this.setState({
+                            chart_val: this.props.value,
+                            animation: "progress 3s linear"
+                        })
+                    }, 1000);
+                }
+            }
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if(prevProps !== this.props){
+            if(this.props.scrolltime){
+                setTimeout(() => {
+                    this.setState({
+                        chart_val: this.props.value,
+                        animation: "progress 3s linear"
+                    })
+                }, 1000);
+            }    
+        }else{
+            return null;
         }
     }
 
     render() {
 
-
         return (
-            <div className="Card_item">
+            <div className="Card_item" id={this.props.id}>
             <Card className="card">
                 <div className="single-chart">
                         <svg viewBox="0 0 36 36" className={`circular-chart white`} preserveAspectRatio="none">
