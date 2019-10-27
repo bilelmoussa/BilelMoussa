@@ -14,6 +14,8 @@ import SkillChart from './home-components/skill-chart';
 import Card from '@material-ui/core/Card';
 import Contact from './home-components/contact';
 
+
+
 const Styles = theme => ({
     button: {
         boxShadow: 'none',
@@ -134,7 +136,13 @@ class Home extends Component {
 
 
     componentDidMount(){
-        window.addEventListener('load', this.handleLoad);
+        let navData = window.performance.getEntriesByType("navigation");
+        if (navData.length > 0 && navData[0].loadEventEnd > 0)
+        {
+            window.addEventListener('scroll', this.handleScroll);
+        } else {
+            window.addEventListener('load', this.handleLoad);
+        }
     }
 
     handleLoad(){
@@ -143,6 +151,7 @@ class Home extends Component {
     }
 
     componentWillUnmount(){
+        window.removeEventListener('load', this.handleLoad);
         window.removeEventListener('scroll', this.handleScroll);
     }
 
@@ -216,8 +225,6 @@ class Home extends Component {
             this.setState({git_github_scroll_time: true});
         }        
     }
-
-
 
     render(){
         const { classes } = this.props;

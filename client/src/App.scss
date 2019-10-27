@@ -105,6 +105,7 @@ body{
     letter-spacing: 1px;
     font-size: 18px;
     margin: auto auto 0 auto;
+    cursor: pointer;
 }
 #scroll_down a span{
     position: absolute;
@@ -154,6 +155,8 @@ body{
     max-width: 2500px;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 5rem;
+
 }
 #about_container{
     display: flex;
@@ -197,7 +200,6 @@ body{
 
 
 #my_projects_section{
-    margin-top: 5rem;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -331,6 +333,7 @@ body{
     display: flex;
     flex-direction: column;
     margin-top: 5rem;
+    margin-bottom: 5rem;
     max-width: 2500px;
     margin-left: auto;
     margin-right: auto;
@@ -476,7 +479,6 @@ body{
 #contact_section{
     display: flex;
     flex-direction: column;
-    margin-top: 5rem;
     max-width: 2500px;
     margin-left: auto;
     margin-right: auto;

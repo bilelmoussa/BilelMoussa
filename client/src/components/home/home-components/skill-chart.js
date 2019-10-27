@@ -17,16 +17,7 @@ class SkillChart extends Component {
     }
 
     componentDidMount(){
-            if(this.props.value){
-                if(this.props.scrolltime){
-                    setTimeout(() => {
-                        this.setState({
-                            chart_val: this.props.value,
-                            animation: "progress 3s linear"
-                        })
-                    }, 1000);
-                }
-            }
+        
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -35,9 +26,9 @@ class SkillChart extends Component {
                 setTimeout(() => {
                     this.setState({
                         chart_val: this.props.value,
-                        animation: "progress 3s linear"
+                        animation: "progress 2s linear"
                     })
-                }, 1000);
+                }, 500);
             }    
         }else{
             return null;
