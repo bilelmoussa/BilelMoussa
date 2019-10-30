@@ -5,7 +5,8 @@ const helmet = require('helmet');
 const cors = require("cors");
 const os = require('os');
 const path = require('path');
-
+const mongoose = require('mongoose');
+const passport = require("passport");
 
 let  address;
 let ifaces = os.networkInterfaces();
@@ -19,6 +20,11 @@ for (let dev in ifaces) {
     if(iface.length > 0) address = iface[0].address;
 }
 
+//user api 
+const user = require('./routes/api/users');
+
+//Message api
+const message = require('./routes/api/messages');
 
 //express app
 const app = express();
@@ -37,11 +43,33 @@ const apiLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
     max: 100
   });
-//app.use("/api/", apiLimiter);
+app.use("/api/", apiLimiter);
 
 
 //body-parser
 app.use(bodyParser.json());
+
+//config 
+const config = require('./config/keys');
+
+//db config 
+const db = config.database;
+
+//connect to database
+mongoose.set('useFindAndModify', false);
+mongoose.set('useUnifiedTopology', true );
+mongoose
+    .connect(db, {useNewUrlParser: true })
+    .then(()=>{console.log('MongoDB Connected... ')})
+    .catch(err=>{console.log('Error: ',  err)});
+
+//passport auth
+app.use(passport.initialize());
+app.use(passport.session());
+require('./config/passport')(passport); 
+
+app.use('/api/user', user);
+app.use('/api/message', message);
 
 app.use(express.static(path.join(__dirname, 'client/build')));
 

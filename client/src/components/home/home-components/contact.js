@@ -13,7 +13,7 @@ import metadata from 'libphonenumber-js/metadata.min.json';
 import InternationalIcon from 'react-phone-number-input/international-icon';
 import CountrySelectReactResponsiveUI from './PhoneSelect';
 import createInput from './PhoneInput';
-import { isValidPhoneNumber } from 'react-phone-number-input';
+import { isValidPhoneNumber, parsePhoneNumber } from 'react-phone-number-input';
 
 const styles = theme =>({
     label:{
@@ -96,8 +96,8 @@ class Contact extends Component {
             }
         }
 
-        if(comment.length < 50){
-            let msg = "At least 50 character in Comment Field !";
+        if(comment.trim().length < 30){
+            let msg = "At least 30 character in Comment Field !";
             if(errors.indexOf(msg) === -1){
                 errors.push(msg);
                 Valid = false;
@@ -110,7 +110,7 @@ class Contact extends Component {
                 comment: comment,
                 fullName: name,
                 email: email,
-                phoneNumber: phone
+                phoneNumber:  parsePhoneNumber(phone)
             }
             console.log(data);
         }
@@ -126,9 +126,9 @@ class Contact extends Component {
                 return(null);
             }else{
                 return (
-                    <div className={classes.formControll} style={{display: "flex"}}>
+                    <div className={classes.formControll} style={{display: "flex", flexDirection: "column"}}>
                         {errors.map((err, i)=>{
-                            return(<p style={{color: "#fff", fontSize: 16, marginBottom: 5, backgroundColor: "#f00", borderRadius: 3, padding: "0.5rem 1rem"}} key={i}>{err}</p>);
+                            return(<p style={{color: "#fff", fontSize: 16, marginBottom: 5, backgroundColor: "#f00", borderRadius: 3, padding: "0.5rem 1rem", marginRight: "auto"}} key={i}>{err}</p>);
                         })}
                     </div>
                 )
@@ -192,7 +192,7 @@ class Contact extends Component {
                                         onChange={this.handleChange('comment')}
                                         className={classes.input}
                                     />
-                                    <p style={{textAlign: "right", margin: "10px 0"}}>{this.state.comment.length}/50</p>
+                                    <p style={{textAlign: "right", margin: "10px 0"}}>{this.state.comment.length}/30</p>
                                 </div>
 
                                 <div className="formControll">
