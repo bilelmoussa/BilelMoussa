@@ -106,8 +106,8 @@ router.post("/post_message", (req, res, next)=>{
     })
 
     let myAccount = {
-        user: "streetvayne13@gmail.com",
-        pass: "Opirabilel123"
+        user: "",
+        pass: ""
     };
 
     let transporter = nodemailer.createTransport({
