@@ -1,0 +1,1 @@
+export const MSG_RES = 'MSG_RES';

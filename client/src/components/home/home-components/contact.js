@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {  withStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import PhoneInput from 'react-phone-number-input';
 import Button from '@material-ui/core/Button';
@@ -14,6 +15,7 @@ import InternationalIcon from 'react-phone-number-input/international-icon';
 import CountrySelectReactResponsiveUI from './PhoneSelect';
 import createInput from './PhoneInput';
 import { isValidPhoneNumber, parsePhoneNumber } from 'react-phone-number-input';
+import  { PostMessage } from '../../../actions/apiCalls';
 
 const styles = theme =>({
     label:{
@@ -61,16 +63,42 @@ class Contact extends Component {
             email: "",
             comment: "",
             errors: [],
+            success_msg: [],
+        }
+    }
+
+    componentDidMount(){    
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if(prevProps !== this.props){
+            if(this.props.Msg_res){
+                if(this.props.Msg_res.response.success === true){
+                    let msg = "Message Sent with success !";
+                    let msgs = this.state.success_msg;
+                    msgs.push(msg);
+                    this.setState({success_msg: msgs, errors: [], phone: "", name: "", email: "", comment: ""});
+                }else{
+                    let msg = this.props.Msg_res.response.message;
+                    let errs = this.state.errors;
+                    if(errs.indexOf(msg) === -1){
+                        errs.push(msg);
+                        this.setState({errors: errs});
+                    }
+                    this.setState({success_msg: []});
+                }
+            }
+        }else{
+            return null;
         }
     }
 
     handleChange = (name) => event => {
-
-        this.setState({...this.state, [name]: event.target.value, errors: []})
+        this.setState({...this.state, [name]: event.target.value, errors: [], success_msg: [] })
     }
 
     handlePhoneChange = value =>{
-        this.setState({...this.state, phone: value, errors: []});
+        this.setState({...this.state, phone: value, errors: [], success_msg: []});
     }
 
     handeleSubmit = (event) =>{
@@ -106,20 +134,27 @@ class Contact extends Component {
         }
 
         if(Valid){
+            let phone_data = parsePhoneNumber(phone);
+
             const data = {
-                comment: comment,
-                fullName: name,
+                message: comment,
+                name: name,
                 email: email,
-                phoneNumber:  parsePhoneNumber(phone)
+                phone_number: {
+                    country: phone_data.country,
+                    countryCallingCode:phone_data.countryCallingCode,
+                    nationalNumber: phone_data.nationalNumber,
+                    number: phone_data.number,
+                }  
             }
-            console.log(data);
+            this.props.PostMessage(data);
         }
 
     }
     
     render() {
         const { classes } = this.props;
-        const  { errors } = this.state;
+        const  { errors, success_msg } = this.state;
 
         const RenderErr = () =>{
             if(empty(errors)){
@@ -135,6 +170,20 @@ class Contact extends Component {
             }
         }
 
+        const RenderSuccessMsg = () =>{
+            if(empty(success_msg)){
+                return(null);
+            }else{
+                return (
+                    <div className={classes.formControll} style={{display: "flex", flexDirection: "column"}}>
+                        {success_msg.map((msg, i)=>{
+                            return(<p style={{color: "#fff", fontSize: 16, marginBottom: 5, backgroundColor: "#34d265", borderRadius: 3, padding: "0.5rem 1rem", marginRight: "auto"}} key={i}>{msg}</p>);
+                        })}
+                    </div>
+                )
+            }
+        }
+
         return (
             <div id="contact_section">
                 <div id="contact_container">
@@ -143,6 +192,7 @@ class Contact extends Component {
                             <h1>Contact Form</h1>
                         </div>
                         {RenderErr()}
+                        {RenderSuccessMsg()}
                         <div id="contact_form">
                             <form style={{display: "flex", flexDirection: "column", width: "100%", height: "100%"}} onSubmit={this.handeleSubmit}>
 
@@ -166,7 +216,7 @@ class Contact extends Component {
                                         internationalIcon={InternationalIcon}
                                         required
                                         country="TN"
-                                        value={ this.state.value }
+                                        value={ this.state.phone }
                                         onChange={this.handlePhoneChange}
                                     />
                                 </div>
@@ -192,7 +242,7 @@ class Contact extends Component {
                                         onChange={this.handleChange('comment')}
                                         className={classes.input}
                                     />
-                                    <p style={{textAlign: "right", margin: "10px 0"}}>{this.state.comment.length}/30</p>
+                                    <p style={{textAlign: "right", margin: "10px 0"}}>{this.state.comment.trim().length}/30</p>
                                 </div>
 
                                 <div className="formControll">
@@ -219,6 +269,11 @@ class Contact extends Component {
 
 Contact.protoType = {
     classes: PropTypes.object.isRequired,
+    Msg_res: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(Contact);
+const mapStateToProps = (state) => ({
+	Msg_res: state.Msg_res,
+})
+
+export default connect(mapStateToProps, {PostMessage})(withStyles(styles)(Contact));

@@ -105,13 +105,9 @@ router.post("/post_message", (req, res, next)=>{
         message: req.body.message
     })
 
-
-
-    //Message.save(newMessage);
-
     let myAccount = {
-        user: "",
-        pass: ""
+        user: "streetvayne13@gmail.com",
+        pass: "Opirabilel123"
     };
 
     let transporter = nodemailer.createTransport({
@@ -134,14 +130,28 @@ router.post("/post_message", (req, res, next)=>{
         replyTo: `${req.body.email}`
     }
 
+    
     transporter.sendMail(mailOptions, function (err, info) {
-        if(err)
-          console.log(err);
-        else
-          console.log(info);
+        if(err){
+            console.log(err);
+        }
+     });
+    
+
+     newMessage.save()
+     .then(msg => {
+         return res.status(200).json({success: true, message: msg});
+     })
+     .catch(err => {
+         console.log(err);
+         return res.status(400).json({success: false, errors: "Server Error !"});
      });
 
-    return res.status(200).json({success: true, Message: newMessage});
+     
+
+
+     
+     
 })
 
 

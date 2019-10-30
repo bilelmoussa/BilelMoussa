@@ -13,7 +13,7 @@ let options = Joi.object({
         number: Joi.string().required(),
     }),
     email: Joi.string().trim().email().required(),
-    message: Joi.string().trim().min(30).required(),
+    message: Joi.string().min(30).required(),
     created_at: Joi.date().default(Date.now()).required(),
     update_at: Joi.date().default(Date.now()).required()
 });

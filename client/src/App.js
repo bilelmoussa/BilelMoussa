@@ -8,22 +8,26 @@ import Register from './components/register/register';
 import PageNotFound from './components/404/page_not_found';
 import contact from './components/contact/contact';
 import projects from './components/projects/projects';
+import { Provider } from 'react-redux';
+import store from './store';
 
 function App() {
   return (
-    <div className="App">
-      <Router>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/dashboard" component={Dashboard} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/contact" component={contact} />
-          <Route exact path="/projects" component={projects} />
-          <Route component={PageNotFound} />
-        </Switch>
-      </Router>
-    </div>
+    <Provider store = { store }>
+      <div className="App">
+        <Router>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/dashboard" component={Dashboard} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/contact" component={contact} />
+            <Route exact path="/projects" component={projects} />
+            <Route component={PageNotFound} />
+          </Switch>
+        </Router>
+      </div>
+    </Provider>
   );
 }
 
