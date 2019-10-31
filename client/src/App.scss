@@ -547,6 +547,25 @@ body{
 }
 
 
+/*Footer */
+.Footer{
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    margin-top: 40px;
+    position: relative;
+}
+
+.Footer svg{
+    position: absolute;
+    height: 800px;
+    min-width: 800px;
+    width: 100%;
+    z-index: -1; 
+}
+
+
+
 @keyframes skills_anim{
     0%{
         transform: translateY(0);

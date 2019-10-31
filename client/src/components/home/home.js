@@ -4,6 +4,7 @@ import About_me_img from '../../static/img/about_me.jpg';
 import My_projects_svg from '../../static/img/my_projects.svg'
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AwesomeSlider from 'react-awesome-slider';
@@ -13,6 +14,7 @@ import ScrollableAnchor from 'react-scrollable-anchor';
 import SkillChart from './home-components/skill-chart';
 import Card from '@material-ui/core/Card';
 import Contact from './home-components/contact';
+import { GetIpInfo } from '../../actions/apiCalls'
 
 
 
@@ -143,6 +145,7 @@ class Home extends Component {
         } else {
             window.addEventListener('load', this.handleLoad);
         }
+        this.props.GetIpInfo();
     }
 
     handleLoad(){
@@ -438,6 +441,11 @@ class Home extends Component {
 
 Home.propTypes = {
     classes: PropTypes.object.isRequired,
+    ipinfo: PropTypes.object.isRequired,
 }
 
-export default withStyles(Styles)(Home);
+const mapStateToProps = (state) => ({
+	ipinfo: state.ipinfo,
+})
+
+export default connect(mapStateToProps, {GetIpInfo})(withStyles(Styles)(Home));

@@ -16,63 +16,63 @@ router.post("/post_message", (req, res, next)=>{
 
 
     if(isEmpty(req.body.name.trim())){
-        return res.status(400).json({success: false, msg: 'Name is Required'});
+        return res.status(400).json({success: false, error: 'Name is Required'});
     }
 
 
     if(isEmpty(req.body.phone_number)){
-        return res.status(400).json({success: false, msg: 'Phone Number is Required'});
+        return res.status(400).json({success: false, error: 'Phone Number is Required'});
     }
 
     
     if(isEmpty(req.body.email.trim())){
-        return res.status(400).json({success: false, msg: 'Email is Required'});
+        return res.status(400).json({success: false, error: 'Email is Required'});
     }
 
 
     if(isEmpty(req.body.message.trim())){
-        return res.status(400).json({success: false, msg: 'Message is Required'});
+        return res.status(400).json({success: false, error: 'Message is Required'});
     }
 
     if(typeof req.body.phone_number !=  "object"){
-        return res.status(400).json({success: false, msg: 'Phone Number Must be an Object with country(ZZ), countryCallingCode, nationalNumber and number(with country code at the start)'}); 
+        return res.status(400).json({success: false, error: 'Phone Number Must be an Object with country(ZZ), countryCallingCode, nationalNumber and number(with country code at the start)'}); 
     }
 
     if( typeof req.body.phone_number ===  "object"){
 
         if(!req.body.phone_number.country){
-            return res.status(400).json({success: false, msg: 'country in Phone Number is Required'});  
+            return res.status(400).json({success: false, error: 'country in Phone Number is Required'});  
         }
         if(req.body.phone_number.country){
             if(isEmpty(req.body.phone_number.country.trim())){
-                return res.status(400).json({success: false, msg: 'country in Phone Number is Required'}); 
+                return res.status(400).json({success: false, error: 'country in Phone Number is Required'}); 
             }
         }
 
         if(!req.body.phone_number.countryCallingCode){
-            return res.status(400).json({success: false, msg: 'countryCallingCode in Phone Number is Required'});  
+            return res.status(400).json({success: false, error: 'countryCallingCode in Phone Number is Required'});  
         }
         if(req.body.phone_number.countryCallingCode){
             if(isEmpty(req.body.phone_number.countryCallingCode.trim())){
-                return res.status(400).json({success: false, msg: 'countryCallingCode in Phone Number is Required'}); 
+                return res.status(400).json({success: false, error: 'countryCallingCode in Phone Number is Required'}); 
             }
         }
         
         if(!req.body.phone_number.nationalNumber){
-            return res.status(400).json({success: false, msg: 'nationalNumber in Phone Number is Required'});  
+            return res.status(400).json({success: false, error: 'nationalNumber in Phone Number is Required'});  
         }
         if(req.body.phone_number.nationalNumber){
             if(isEmpty(req.body.phone_number.nationalNumber.trim())){
-                return res.status(400).json({success: false, msg: 'nationalNumber in Phone Number is Required'}); 
+                return res.status(400).json({success: false, error: 'nationalNumber in Phone Number is Required'}); 
             }
         }
 
         if(!req.body.phone_number.number){
-            return res.status(400).json({success: false, msg: 'number in Phone Number is Required'});  
+            return res.status(400).json({success: false, error: 'number in Phone Number is Required'});  
         }
         if(req.body.phone_number.number){
             if(isEmpty(req.body.phone_number.number.trim())){
-                return res.status(400).json({success: false, msg: 'number in Phone Number is Required'});  
+                return res.status(400).json({success: false, error: 'number in Phone Number is Required'});  
             }
         }
 
@@ -82,15 +82,15 @@ router.post("/post_message", (req, res, next)=>{
     const number = phoneUtil.parseAndKeepRawInput(req.body.phone_number.nationalNumber, req.body.phone_number.country);
 
     if(!phoneUtil.isValidNumber(number)){
-        return res.status(400).json({success: false, msg: 'Phone Number is Not Valid !'});
+        return res.status(400).json({success: false, error: 'Phone Number is Not Valid !'});
     }
 
     if(!isEmail(req.body.email)){
-        return res.status(400).json({success: false, msg: 'Email is Not Valid !'});
+        return res.status(400).json({success: false, error: 'Email is Not Valid !'});
     };
     
     if(req.body.message.trim().length < 30){
-        return res.status(400).json({success: false, msg: 'At least 30 character in Message !'});
+        return res.status(400).json({success: false, error: 'At least 30 character in Message !'});
     }
 
     let newMessage = new Message({
@@ -137,20 +137,19 @@ router.post("/post_message", (req, res, next)=>{
         }
      });
     
-
+     
      newMessage.save()
      .then(msg => {
          return res.status(200).json({success: true, message: msg});
      })
      .catch(err => {
          console.log(err);
-         return res.status(400).json({success: false, errors: "Server Error !"});
+         return res.status(400).json({success: false, error: "Server Error !"});
      });
 
-     
+    
 
 
-     
      
 })
 

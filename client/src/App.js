@@ -10,6 +10,7 @@ import contact from './components/contact/contact';
 import projects from './components/projects/projects';
 import { Provider } from 'react-redux';
 import store from './store';
+import Footer from './components/footer/footer';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route exact path="/projects" component={projects} />
             <Route component={PageNotFound} />
           </Switch>
+          <Footer />
         </Router>
       </div>
     </Provider>

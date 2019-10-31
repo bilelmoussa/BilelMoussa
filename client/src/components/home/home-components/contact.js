@@ -64,6 +64,7 @@ class Contact extends Component {
             comment: "",
             errors: [],
             success_msg: [],
+            ipinfo: {},
         }
     }
 
@@ -72,14 +73,14 @@ class Contact extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         if(prevProps !== this.props){
-            if(this.props.Msg_res){
+            if(!empty(this.props.Msg_res.response)){
                 if(this.props.Msg_res.response.success === true){
                     let msg = "Message Sent with success !";
                     let msgs = this.state.success_msg;
                     msgs.push(msg);
                     this.setState({success_msg: msgs, errors: [], phone: "", name: "", email: "", comment: ""});
                 }else{
-                    let msg = this.props.Msg_res.response.message;
+                    let msg = this.props.Msg_res.response.error;
                     let errs = this.state.errors;
                     if(errs.indexOf(msg) === -1){
                         errs.push(msg);
@@ -88,6 +89,11 @@ class Contact extends Component {
                     this.setState({success_msg: []});
                 }
             }
+
+            if(this.props.ipinfo){
+                this.setState({ipinfo: this.props.ipinfo.data});
+            }
+
         }else{
             return null;
         }
@@ -154,7 +160,12 @@ class Contact extends Component {
     
     render() {
         const { classes } = this.props;
-        const  { errors, success_msg } = this.state;
+        const  { errors, success_msg, ipinfo } = this.state;
+        let country = "TN";
+
+        if(!empty(ipinfo.country)){
+            country = ipinfo.country;
+        }
 
         const RenderErr = () =>{
             if(empty(errors)){
@@ -215,7 +226,7 @@ class Contact extends Component {
                                         metadata={metadata}
                                         internationalIcon={InternationalIcon}
                                         required
-                                        country="TN"
+                                        country={country}
                                         value={ this.state.phone }
                                         onChange={this.handlePhoneChange}
                                     />
@@ -270,10 +281,12 @@ class Contact extends Component {
 Contact.protoType = {
     classes: PropTypes.object.isRequired,
     Msg_res: PropTypes.object.isRequired,
+    ipinfo: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = (state) => ({
-	Msg_res: state.Msg_res,
+    Msg_res: state.Msg_res,
+    ipinfo: state.ipinfo
 })
 
 export default connect(mapStateToProps, {PostMessage})(withStyles(styles)(Contact));
