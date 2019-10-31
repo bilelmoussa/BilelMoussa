@@ -14,7 +14,7 @@ const Message = require('../../models/message');
 //POST MESSGAES
 router.post("/post_message", (req, res, next)=>{
 
-/*
+
     if(isEmpty(req.body.name.trim())){
         return res.status(400).json({success: false, error: 'Name is Required'});
     }
@@ -38,6 +38,8 @@ router.post("/post_message", (req, res, next)=>{
         return res.status(400).json({success: false, error: 'Phone Number Must be an Object with country(ZZ), countryCallingCode, nationalNumber and number(with country code at the start)'}); 
     }
 
+    /*
+    
     if( typeof req.body.phone_number ===  "object"){
 
         if(!req.body.phone_number.country){
