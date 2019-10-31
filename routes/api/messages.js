@@ -106,8 +106,8 @@ router.post("/post_message", (req, res, next)=>{
     })
 
     let myAccount = {
-        user: process.env.EMAIL,
-        pass: process.env.EMAILPASS
+        user: "streetvayne13@gmail.com",
+        pass: "Opirabilel123"
     };
 
     let transporter = nodemailer.createTransport({
@@ -147,10 +147,7 @@ router.post("/post_message", (req, res, next)=>{
          return res.status(400).json({success: false, error: "Server Error !"});
      });
 
-    
-
-
-     
+         
 })
 
 
