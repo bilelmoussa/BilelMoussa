@@ -130,13 +130,13 @@ router.post("/post_message", (req, res, next)=>{
         replyTo: `${req.body.email}`
     }
 
-    
+    /*
     transporter.sendMail(mailOptions, function (err, info) {
         if(err){
             console.log(err);
         }
      });
-    
+    */
      
      newMessage.save()
      .then(msg => {
