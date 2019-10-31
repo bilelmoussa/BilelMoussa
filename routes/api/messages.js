@@ -38,8 +38,7 @@ router.post("/post_message", (req, res, next)=>{
         return res.status(400).json({success: false, error: 'Phone Number Must be an Object with country(ZZ), countryCallingCode, nationalNumber and number(with country code at the start)'}); 
     }
 
-    /*
-    
+
     if( typeof req.body.phone_number ===  "object"){
 
         if(!req.body.phone_number.country){
@@ -95,6 +94,7 @@ router.post("/post_message", (req, res, next)=>{
         return res.status(400).json({success: false, error: 'At least 30 character in Message !'});
     }
 
+/*
     let newMessage = new Message({
         name: req.body.name,
         phone_number: {
