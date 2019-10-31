@@ -94,7 +94,7 @@ router.post("/post_message", (req, res, next)=>{
         return res.status(400).json({success: false, error: 'At least 30 character in Message !'});
     }
 
-/*
+
     let newMessage = new Message({
         name: req.body.name,
         phone_number: {
@@ -107,6 +107,7 @@ router.post("/post_message", (req, res, next)=>{
         message: req.body.message
     })
 
+/*
     let myAccount = {
         user: "streetvayne13@gmail.com",
         pass: "Opirabilel123"
@@ -139,7 +140,8 @@ router.post("/post_message", (req, res, next)=>{
         }
      });
     
-     
+*/
+
      newMessage.save()
      .then(msg => {
          return res.status(200).json({success: true, message: msg});
@@ -148,9 +150,9 @@ router.post("/post_message", (req, res, next)=>{
          console.log(err);
          return res.status(400).json({success: false, error: "Server Error !"});
      });
-*/
 
-return res.status(200).json({success: true, message: "this should work !"});
+
+//return res.status(200).json({success: true, message: "this should work !"});
 
   
 })
