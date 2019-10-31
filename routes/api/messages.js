@@ -107,7 +107,7 @@ router.post("/post_message", (req, res, next)=>{
         message: req.body.message
     })
 
-/*
+
     let myAccount = {
         user: process.env.EMAIL,
         pass: process.env.EMAILPASS
@@ -140,8 +140,8 @@ router.post("/post_message", (req, res, next)=>{
         }
      });
     
-*/
-     
+
+
      newMessage.save()
      .then(msg => {
          return res.status(200).json({success: true, message: msg});
