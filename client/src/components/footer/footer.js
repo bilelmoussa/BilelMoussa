@@ -9,14 +9,14 @@ import { Link } from 'react-router-dom';
 
 const styles = theme => ({ 
     footer:{
-        marginTop: 60,
+        marginTop: 100,
         marginBottom: 40,
         position: "relative",
         display: "flex",
         flexDirection: "row",
         width: "100%",
         padding: 15,
-        justifyContent: "flex-start",
+        justifyContent: "space-evenly",
         [theme.breakpoints.down('xs')]: {
           flexDirection: "column"
         },
@@ -83,7 +83,24 @@ class Footer extends Component {
                         <ListItem  button classes={{root:classes.List_Item, button: classes.rootListText}} component="a" href="https://www.instagram.com/moussabilel/" target="_blank">
                             <ListItemText classes={{primary: classes.Footer_List_Text}} primary="instagram" />
                         </ListItem>
+                        <ListItem  button classes={{root:classes.List_Item, button: classes.rootListText}} component="a" href="https://www.linkedin.com/in/bilel-moussa-2b9697162/" target="_blank">
+                            <ListItemText classes={{primary: classes.Footer_List_Text}} primary="Linkedin" />
+                        </ListItem>
                     </List>
+
+                    <List className={classes.ListMenu}>
+                        <h3 className={classes.List_Name}>Others Platform</h3>          
+                        <ListItem button  classes={{root:classes.List_Item, button: classes.rootListText}} component="a" href='https://www.fiverr.com/bilelmoussa' target="_blank">
+                            <ListItemText classes={{primary: classes.Footer_List_Text}} primary="Fiverr" />
+                        </ListItem>
+                        <ListItem  button classes={{root:classes.List_Item, button: classes.rootListText}} component="a" href='https://www.peopleperhour.com/freelancer/development-it/bilel-moussa-web-developer-xaxznyw' target="_blank">
+                            <ListItemText classes={{primary: classes.Footer_List_Text}} primary="peopleperhour" />
+                        </ListItem>
+                        <ListItem  button classes={{root:classes.List_Item, button: classes.rootListText}} component="a" href='https://www.guru.com/freelancers/bilel-moussa' target="_blank">
+                            <ListItemText classes={{primary: classes.Footer_List_Text}} primary="Guru" />
+                        </ListItem>
+                    </List>
+
                 </div>
                 <div id="copyright">
                   Bilel Moussa, Copyright &copy; 	{new Date().getFullYear()}
