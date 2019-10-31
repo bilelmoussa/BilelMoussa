@@ -14,7 +14,7 @@ const Message = require('../../models/message');
 //POST MESSGAES
 router.post("/post_message", (req, res, next)=>{
 
-
+/*
     if(isEmpty(req.body.name.trim())){
         return res.status(400).json({success: false, error: 'Name is Required'});
     }
@@ -130,13 +130,13 @@ router.post("/post_message", (req, res, next)=>{
         replyTo: `${req.body.email}`
     }
 
-    /*
+    
     transporter.sendMail(mailOptions, function (err, info) {
         if(err){
             console.log(err);
         }
      });
-    */
+    
      
      newMessage.save()
      .then(msg => {
@@ -146,8 +146,11 @@ router.post("/post_message", (req, res, next)=>{
          console.log(err);
          return res.status(400).json({success: false, error: "Server Error !"});
      });
+*/
 
-         
+return res.status(200).json({success: true, message: "this should work !"});
+
+  
 })
 
 
