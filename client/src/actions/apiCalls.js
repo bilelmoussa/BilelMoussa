@@ -12,6 +12,7 @@ export const PostMessage = (message) => dispatch =>{
         })
         .catch(err => {
             console.log(err);
+            console.log(err.response);
             dispatch({
                 type: MSG_RES,
                 payload: err.response.data

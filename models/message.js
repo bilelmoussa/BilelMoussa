@@ -7,7 +7,7 @@ const schema = mongoose.Schema;
 let options = Joi.object({
     name: Joi.string().trim().min(1).max(30).required(),
     phone_number: Joi.object({
-        country: Joi.string().trim().min(2).max(2).required(),
+        country: Joi.string().trim().required(),
         countryCallingCode: Joi.string().trim().required(),
         nationalNumber: Joi.string().trim().required(),
         number: Joi.string().required(),
