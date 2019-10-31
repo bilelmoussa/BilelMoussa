@@ -4,6 +4,7 @@ import { MSG_RES, IPINFO} from './types';
 export const PostMessage = (message) => dispatch =>{
     axios.post('/api/message/post_message', message)
         .then(res=>{
+            console.log(res);
             dispatch({
                 type: MSG_RES,
                 payload: res.data
@@ -13,7 +14,7 @@ export const PostMessage = (message) => dispatch =>{
             console.log(err);
             dispatch({
                 type: MSG_RES,
-                payload: err.response.data || 'Server Error !'
+                payload: err.response.data
             })
         })
 }
