@@ -106,8 +106,8 @@ router.post("/post_message", (req, res, next)=>{
     })
 
     let myAccount = {
-        user: "",
-        pass: ""
+        user: process.env.EMAIL,
+        pass: process.env.EMAILPASS
     };
 
     let transporter = nodemailer.createTransport({

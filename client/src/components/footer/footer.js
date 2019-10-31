@@ -65,7 +65,6 @@ class Footer extends Component {
             <div className="Footer">
                 <FooterSvg />
                 <div className={classes.footer}>
-
                     <List className={classes.ListMenu}>
                         <h3 className={classes.List_Name}>useful links</h3>          
                         <ListItem button  classes={{root:classes.List_Item, button: classes.rootListText}} component={Link} to={'/contact'} >
@@ -85,8 +84,10 @@ class Footer extends Component {
                             <ListItemText classes={{primary: classes.Footer_List_Text}} primary="instagram" />
                         </ListItem>
                     </List>
-
-            </div>
+                </div>
+                <div id="copyright">
+                  Bilel Moussa, Copyright &copy; 	{new Date().getFullYear()}
+                </div>
             </div>
         )
     }

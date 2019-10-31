@@ -1,9 +1,11 @@
 body{
     //height: 8000px;
     background-color: #ffffff;
-
 }
 
+html {
+    scroll-behavior: smooth;
+}
 
 /*------------------Welcome Section------------------*/
 
@@ -551,6 +553,7 @@ body{
 .Footer{
     display: flex;
     overflow: hidden;
+    flex-direction: column;
     width: 100%;
     margin-top: 40px;
     position: relative;
@@ -564,7 +567,13 @@ body{
     z-index: -1; 
 }
 
-
+#copyright{
+    display: block;
+    color: #ffffff;
+    text-align: center;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+}
 
 @keyframes skills_anim{
     0%{
