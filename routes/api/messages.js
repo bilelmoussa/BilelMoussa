@@ -141,7 +141,7 @@ router.post("/post_message", (req, res, next)=>{
      });
     
 */
-
+     /*
      newMessage.save()
      .then(msg => {
          return res.status(200).json({success: true, message: msg});
@@ -150,9 +150,9 @@ router.post("/post_message", (req, res, next)=>{
          console.log(err);
          return res.status(400).json({success: false, error: "Server Error !"});
      });
+*/
 
-
-//return res.status(200).json({success: true, message: "this should work !"});
+return res.status(200).json({success: true, message: "this should work !", msg: newMessage});
 
   
 })
