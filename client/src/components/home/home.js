@@ -308,7 +308,6 @@ class Home extends Component {
                                     <div className="project_box_call_to_action_btn">
                                         <Button variant="contained" className={classes.box_button} href="https://kpi-application.herokuapp.com/" target="_blank">Live</Button>
                                         <Button variant="contained" className={classes.box_button} href="https://github.com/bilelmoussa/kpi-app" target="_blank">Code</Button>
-                                        <Button variant="contained" className={classes.box_button}>More</Button>
                                     </div>
                                 </div>
 
@@ -329,7 +328,6 @@ class Home extends Component {
                                     <div className="project_box_call_to_action_btn">
                                         <Button variant="contained" className={classes.box_button} href="https://bilelmoussa.github.io/landsafe/" target="_blank">Live</Button>
                                         <Button variant="contained" className={classes.box_button} href="https://github.com/bilelmoussa/landsafe" target="_blank">Code</Button>
-                                        <Button variant="contained" className={classes.box_button}>More</Button>
                                     </div>
                                 </div>
 
@@ -356,7 +354,6 @@ class Home extends Component {
                                     <div className="project_box_call_to_action_btn">
                                         <Button variant="contained" className={classes.box_button} href="https://nebula-shop.000webhostapp.com/" target="_blank">Live</Button>
                                         <Button variant="contained" className={classes.box_button} href="https://github.com/bilelmoussa/BrightCapella" target="_blank">Code</Button>
-                                        <Button variant="contained" className={classes.box_button}>More</Button>
                                     </div>
                                 </div>
 
@@ -378,7 +375,6 @@ class Home extends Component {
                                     <div className="project_box_call_to_action_btn">
                                         <Button variant="contained" className={classes.box_button} href="https://bilelmoussa.github.io/elite4you/" target="_blank">Live</Button>
                                         <Button variant="contained" className={classes.box_button} href="https://github.com/bilelmoussa/elite4you" target="_blank">Code</Button>
-                                        <Button variant="contained" className={classes.box_button}>More</Button>
                                     </div>
                                 </div>
 
