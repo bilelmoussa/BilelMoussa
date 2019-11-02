@@ -279,7 +279,9 @@ class Home extends Component {
                         <div id="my_projects_content">
                             <h1>My Projects</h1>
                             <p>
-                            All of my projects are responsive and supported by modern browsers .        
+                            An effective and immersive user experience is what catches the attention and spreads a clear message. this is why i use modern UI/UX design like Illustration/Colors, gradients and the overlapping effect/3D graphics ...
+                            <br/>
+                            All of my projects are responsive and supported by modern browsers .     
                             </p>
                         </div>
                         <div id="my_projects_svg">
@@ -393,7 +395,11 @@ class Home extends Component {
                     <div id="skills_header">
                         <div id="skills_content">
                             <h1>Skills</h1>
-                            <p>I have diffrents technologies in use, but i'm more skilled in JS than others .</p>
+                            <p>
+                            I have the skills and abilities to develop and design websites, i am a self taught, i been learning on online platforms like (codecademy/sololearn/w3schools ...)
+                            <br/>
+                            My main programming language is javascript, i use some of the js frameworks/libraries too like React and Angular .
+                            </p>
                         </div>
                         <div id="skills_illustration">
                             <SkillSvg id="skill_svg" />
