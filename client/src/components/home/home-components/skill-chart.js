@@ -17,7 +17,31 @@ class SkillChart extends Component {
     }
 
     componentDidMount(){
-        
+        if(this.props.scrolltime){
+            setTimeout(() => {
+                this.setState({
+                    chart_val: this.props.value,
+                    animation: "progress 2s linear"
+                })
+            }, 500);
+        }    
+    }
+
+	static getDerivedStateFromProps(nextProps, prevState){
+        if(nextProps!==prevState){
+            if(nextProps.scrolltime){
+                return setTimeout(() => {
+                    return{
+                        chart_val: nextProps.value,
+                        animation: "progress 2s linear"
+                    }
+                }, 500);
+            }else{
+                return null;
+            }   
+        }else{
+            return null;
+        }
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -39,6 +63,7 @@ class SkillChart extends Component {
 
         return (
             <div className="Card_item" id={this.props.id}>
+            <div style={{position: "fixed", zIndex: 5, top: 20, left: 20,}}>{this.state.console}</div>  
             <Card className="card">
                 <div className="single-chart">
                         <svg viewBox="0 0 36 36" className={`circular-chart white`} preserveAspectRatio="none">

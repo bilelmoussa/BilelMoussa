@@ -148,6 +148,10 @@ class Home extends Component {
         this.props.GetIpInfo();
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        window.addEventListener('scroll', this.handleScroll);
+    }
+
     handleLoad(){
         this.skills_animation();
         window.addEventListener('scroll', this.handleScroll);
