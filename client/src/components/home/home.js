@@ -360,7 +360,7 @@ class Home extends Component {
                                         E-commerce Website 
                                     </div>
                                     <div className="project_box_description">
-                                        E-commerce website developed with Mern stack . 
+                                        E-commerce website developed with wordpress / woocommerce and my custom Theme .
                                     </div>
                                     <div className="project_box_call_to_action_btn">
                                         <Button variant="contained" className={classes.box_button} href="https://nebula-shop.000webhostapp.com/" target="_blank">Live</Button>
@@ -381,7 +381,7 @@ class Home extends Component {
                                         Girly E-commerce Website 
                                     </div>
                                     <div className="project_box_description">
-                                        E-commerce website developed with wordpress / woocommerce and my custom Theme . 
+                                        E-commerce website developed with Mern stack . 
                                     </div>
                                     <div className="project_box_call_to_action_btn">
                                         <Button variant="contained" className={classes.box_button} href="https://bilelmoussa.github.io/elite4you/" target="_blank">Live</Button>
