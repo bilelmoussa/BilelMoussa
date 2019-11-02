@@ -11,11 +11,17 @@ import projects from './components/projects/projects';
 import { Provider } from 'react-redux';
 import store from './store';
 import Footer from './components/footer/footer';
+import {Helmet} from "react-helmet";
 
 function App() {
   return (
     <Provider store = { store }>
       <div className="App">
+        <Helmet>
+                <meta charSet="utf-8" />
+                <title>Bilel Moussa</title>
+                <link rel="canonical" href="https://bilel-moussa.herokuapp.com" />
+        </Helmet>
         <Router>
           <Switch>
             <Route exact path="/" component={Home} />

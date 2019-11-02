@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import {Helmet} from "react-helmet";
 
 const Styles = theme => ({
     button: {
@@ -38,6 +39,11 @@ class contact extends Component {
         const { classes } = this.props;
         return (
             <div>
+                <Helmet>
+                    <title>Bilel Moussa | Contact</title>
+                    <meta name="description" content="Bilel Moussa Contact Page" />
+                    <meta name="keywords" content="Web Developer Contact Page, Web Designer Contact Page, Contact Form"/>
+                </Helmet>
                 <div className={classes.goBackContainer}>
                     <Button variant="contained" className={classes.button} component={Link} to={`/`}>Go Back Home</Button>
                 </div>

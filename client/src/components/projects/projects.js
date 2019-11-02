@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import My_projects_svg from '../../static/img/my_projects.svg'
 import { Link } from 'react-router-dom';
+import {Helmet} from "react-helmet";
 
 const styles = theme => ({
     box_button:{
@@ -61,6 +62,12 @@ class projects extends Component {
         const { classes } = this.props;
         return (
             <div>
+
+                <Helmet>
+                    <title>Bilel Moussa | Projects</title>
+                    <meta name="description" content="Bilel Moussa Projects Page" />
+                    <meta name="keywords" content="Web Developer Projects, UI/UX Projects, Web Designer Projects, Web Developer Works"/>
+                </Helmet>
 
                 <div className={classes.goBackContainer}>
                     <Button variant="contained" className={classes.button} component={Link} to={`/`}>Go Back Home</Button>

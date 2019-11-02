@@ -15,6 +15,7 @@ import SkillChart from './home-components/skill-chart';
 import Card from '@material-ui/core/Card';
 import Contact from './home-components/contact';
 import { GetIpInfo } from '../../actions/apiCalls'
+import {Helmet} from "react-helmet";
 
 
 
@@ -238,6 +239,10 @@ class Home extends Component {
 
         return(
             <div>
+                <Helmet>
+                    <title>Bilel Moussa | Home</title>
+                    <meta name="description" content="Bilel Moussa Personal Website" />
+                </Helmet>
                 <div id="welcome_section">
 
                         <div id="welcome_svg_container">
