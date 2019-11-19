@@ -11,14 +11,14 @@ const styles = theme => ({
     footer:{
         marginTop: 100,
         marginBottom: 40,
-        position: "relative",
-        display: "flex",
-        flexDirection: "row",
-        width: "100%",
+        position: 'relative',
+        display: 'flex',
+        flexDirection: 'row',
+        width: '100%',
         padding: 15,
-        justifyContent: "space-evenly",
+        justifyContent: 'space-evenly',
         [theme.breakpoints.down('xs')]: {
-          flexDirection: "column"
+          flexDirection: 'column'
         },
       },
     
@@ -26,16 +26,16 @@ const styles = theme => ({
         letterSpacing: 2,
         fontFamily: "'Orbitron', sans-serif;",
         color: '#f1f1f1',
-        textTransform: "capitalize",
+        textTransform: 'capitalize',
       },
       
       List_Item:{
-        textAlign: "center",
+        textAlign: 'center',
       },
     
       ListMenu:{
         overflow: 'hidden',
-        marginLeft: "2rem",
+        marginLeft: '2rem',
         [theme.breakpoints.down('xs')]: {
           width: '200px',
           margin: '0 auto'
@@ -43,14 +43,14 @@ const styles = theme => ({
       },
 
       rootListText:{
-        padding: "8px 15px"
+        padding: '8px 15px'
       },
     
       List_Name:{
-        textAlign: "center",
-        color: "#ffffff",
+        textAlign: 'center',
+        color: '#ffffff',
         letterSpacing: 3,
-        textTransform: "capitalize",
+        textTransform: 'capitalize',
         margin: '20px 0',
         fontFamily: "'Orbitron', sans-serif",
         padding: 8,
@@ -62,13 +62,13 @@ class Footer extends Component {
     render() {
         const {classes} = this.props;
         return (
-            <div className="Footer">
+            <div className='Footer'>
                 <FooterSvg />
                 <div className={classes.footer}>
                     <List className={classes.ListMenu}>
                         <h3 className={classes.List_Name}>useful links</h3>          
                         <ListItem button  classes={{root:classes.List_Item, button: classes.rootListText}} component={Link} to={'/contact'} >
-                            <ListItemText classes={{primary: classes.Footer_List_Text}} primary="Contact me" />
+                            <ListItemText classes={{primary: classes.Footer_List_Text}} primary='Contact me' />
                         </ListItem>
                         <ListItem  button classes={{root:classes.List_Item, button: classes.rootListText}} component={Link} to={'/projects'}>
                             <ListItemText classes={{primary: classes.Footer_List_Text}} primary="My Projects" />

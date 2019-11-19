@@ -7,6 +7,7 @@ const os = require('os');
 const path = require('path');
 const mongoose = require('mongoose');
 const passport = require("passport");
+var compression = require('compression')
 
 let  address;
 let ifaces = os.networkInterfaces();
@@ -28,6 +29,9 @@ const message = require('./routes/api/messages');
 
 //express app
 const app = express();
+
+//compress
+app.use(compression());
 
 // cross browser
 app.use(cors());
@@ -83,4 +87,4 @@ const port = process.env.PORT || 5000;
 
 app.listen(port, ()=>{
   console.log('\x1b[36m%s\x1b[0m', `Server Started Localy on : http://localhost:${port} And http://${address}:${port}`);                
-});
+})

@@ -16,16 +16,17 @@ import CountrySelectReactResponsiveUI from './PhoneSelect';
 import createInput from './PhoneInput';
 import { isValidPhoneNumber, parsePhoneNumber } from 'react-phone-number-input';
 import  { PostMessage } from '../../../actions/apiCalls';
+import ContactSvg from '../../../static/img/contact.svg';
 
 const styles = theme =>({
     label:{
-        textTransform: "uppercase",
+        textTransform: 'uppercase',
         letterSpacing: 1,
-        fontWeight: "bold",
+        fontWeight: 'bold',
         marginBottom: 15,
     },
     input:{
-        border: "1px solid #ccc",
+        border: '1px solid #ccc',
         paddingLeft: 5,
     },
     close: {
@@ -34,37 +35,99 @@ const styles = theme =>({
     button:{
         boxShadow: 'none',
         margin: "0 auto 0 0",
-        backgroundColor: "#419aff",
+        backgroundColor: '#419aff',
         borderColor: '#419aff',
-        color: "#fff",
+        color: '#fff',
         textTransform: 'capitalize',
         letterSpacing: 1,
         padding: '6px 1.5rem',
-        borderBottom: "3px solid #357ac5",
+        borderBottom: '3px solid #357ac5',
         '&:hover':{
-            backgroundColor: "#357ac5",
-            borderColor: "#357ac5"
+            backgroundColor: '#357ac5',
+            borderColor: '#357ac5'
         },
         '&active':{
             boxShadow: 'none',
-            backgroundColor: "#357ac5",
-            borderColor: "#357ac5"
+            backgroundColor: '#357ac5',
+            borderColor: '#357ac5'
         }
     }
 });
 
+const inlineStyle = {
+    msgformControll: {
+        display: 'flex', 
+        flexDirection: 'column'   
+    },
+    errP:{
+        color: '#fff',
+        fontSize: 16,
+        marginBottom: 5,
+        backgroundColor: '#f00',
+        borderRadius: 3,
+        padding: '0.5rem 1rem',
+        marginRight: 'auto'
+    },
+    sucsP:{
+        color: '#fff',
+        fontSize: 16,
+        marginBottom: 5,
+        backgroundColor: '#34d265',
+        borderRadius: 3, 
+        padding: '0.5rem 1rem',
+        marginRight: 'auto'
+    },
+    form:{
+        display: 'flex',
+        flexDirection: 'column',
+        width: '100%', 
+        height: '100%'
+    },
+    legnthP:{
+        textAlign: 'right',
+        margin: '10px 0'
+    } 
+}
+
+const RenderErr = (errors, classes) =>{
+    if(empty(errors)){
+        return(null);
+    }else{
+        return (
+            <div className={classes.formControll} style={inlineStyle.msgformControll}>
+                {errors.map((err, i)=>{
+                    return(<p style={inlineStyle.errP} key={i}>{err}</p>);
+                })}
+            </div>
+        )
+    }
+}
+
+const RenderSuccessMsg = (success_msg, classes) =>{
+    if(empty(success_msg)){
+        return(null);
+    }else{
+        return (
+            <div className={classes.formControll} style={inlineStyle.msgformControll}>
+                {success_msg.map((msg, i)=>{
+                    return(<p style={inlineStyle.sucsP} key={i}>{msg}</p>);
+                })}
+            </div>
+        )
+    }
+}
 
 class Contact extends Component {
     constructor(){
         super();
         this.state={
-            phone: "",
-            name: "",
-            email: "",
-            comment: "",
+            phone: '',
+            name: '',
+            email: '',
+            comment: '',
             errors: [],
             success_msg: [],
-            ipinfo: {},
+            country: 'TN'
         }
     }
 
@@ -75,10 +138,10 @@ class Contact extends Component {
         if(prevProps !== this.props){
             if(!empty(this.props.Msg_res.response)){
                 if(this.props.Msg_res.response.success === true){
-                    let msg = "Message Sent with success !";
+                    let msg = 'Message Sent with success !';
                     let msgs = this.state.success_msg;
                     msgs.push(msg);
-                    this.setState({success_msg: msgs, errors: [], phone: "", name: "", email: "", comment: ""});
+                    this.setState({success_msg: msgs, errors: [], phone: '', name: '', email: '', comment: ''});
                 }else{
                     let msg = this.props.Msg_res.response.error;
                     let errs = this.state.errors;
@@ -91,7 +154,7 @@ class Contact extends Component {
             }
 
             if(this.props.ipinfo){
-                this.setState({ipinfo: this.props.ipinfo.data});
+                this.setState({country: this.props.ipinfo.data.country});
             }
 
         }else{
@@ -113,7 +176,7 @@ class Contact extends Component {
         let Valid = true;
 
         if(!isValidPhoneNumber(phone)){
-            let msg = "Phone Number is Not Valid !";
+            let msg = 'Phone Number is Not Valid !';
             if(errors.indexOf(msg) === -1){
                 errors.push(msg);
                 Valid = false;
@@ -122,7 +185,7 @@ class Contact extends Component {
         }
 
         if(!checkEmail(email)){
-            let msg = "Email is Not Valid !";
+            let msg = 'Email is Not Valid !';
             if(errors.indexOf(msg) === -1){
                 errors.push(msg);
                 Valid = false;
@@ -131,7 +194,7 @@ class Contact extends Component {
         }
 
         if(comment.trim().length < 30){
-            let msg = "At least 30 character in Comment Field !";
+            let msg = 'At least 30 character in Comment Field !';
             if(errors.indexOf(msg) === -1){
                 errors.push(msg);
                 Valid = false;
@@ -157,57 +220,24 @@ class Contact extends Component {
         }
 
     }
-    
+
     render() {
         const { classes } = this.props;
-        const  { errors, success_msg, ipinfo } = this.state;
-        let country = "TN";
-
-        if(!empty(ipinfo.country)){
-            country = ipinfo.country;
-        }
-
-        const RenderErr = () =>{
-            if(empty(errors)){
-                return(null);
-            }else{
-                return (
-                    <div className={classes.formControll} style={{display: "flex", flexDirection: "column"}}>
-                        {errors.map((err, i)=>{
-                            return(<p style={{color: "#fff", fontSize: 16, marginBottom: 5, backgroundColor: "#f00", borderRadius: 3, padding: "0.5rem 1rem", marginRight: "auto"}} key={i}>{err}</p>);
-                        })}
-                    </div>
-                )
-            }
-        }
-
-        const RenderSuccessMsg = () =>{
-            if(empty(success_msg)){
-                return(null);
-            }else{
-                return (
-                    <div className={classes.formControll} style={{display: "flex", flexDirection: "column"}}>
-                        {success_msg.map((msg, i)=>{
-                            return(<p style={{color: "#fff", fontSize: 16, marginBottom: 5, backgroundColor: "#34d265", borderRadius: 3, padding: "0.5rem 1rem", marginRight: "auto"}} key={i}>{msg}</p>);
-                        })}
-                    </div>
-                )
-            }
-        }
+        const  { errors, success_msg, country } = this.state;
 
         return (
-            <div id="contact_section">
-                <div id="contact_container">
-                    <div id="contact_content">
-                        <div id="contact_header">
+            <div id='contact_section'>
+                <div id='contact_container'>
+                    <div id='contact_content'>
+                        <div id='contact_header'>
                             <h1>Contact Form</h1>
                         </div>
-                        {RenderErr()}
-                        {RenderSuccessMsg()}
-                        <div id="contact_form">
-                            <form style={{display: "flex", flexDirection: "column", width: "100%", height: "100%"}} onSubmit={this.handeleSubmit}>
+                        {RenderErr(errors, classes)}
+                        {RenderSuccessMsg(success_msg, classes)}
+                        <div id='contact_form'>
+                            <form style={inlineStyle.form} onSubmit={this.handeleSubmit}>
 
-                                <div className="formControll">
+                                <div className='formControll'>
                                     <label className={classes.label}>Full name :</label>
                                     <Input
                                         required
@@ -217,7 +247,7 @@ class Contact extends Component {
                                     />
                                 </div>
 
-                                <div className="formControll">
+                                <div className='formControll'>
                                     <label className={classes.label}>Phone Number :</label>
                                     <PhoneInput
                                         inputComponent={createInput}
@@ -232,7 +262,7 @@ class Contact extends Component {
                                     />
                                 </div>
 
-                                <div className="formControll">
+                                <div className='formControll'>
                                     <label className={classes.label}>Email :</label>
                                     <Input
                                         type="email"
@@ -243,7 +273,7 @@ class Contact extends Component {
                                     />
                                 </div>
 
-                                <div className="formControll">
+                                <div className='formControll'>
                                     <label className={classes.label}>Comments/Questions :</label>
                                     <Input
                                         multiline
@@ -253,14 +283,14 @@ class Contact extends Component {
                                         onChange={this.handleChange('comment')}
                                         className={classes.input}
                                     />
-                                    <p style={{textAlign: "right", margin: "10px 0"}}>{this.state.comment.trim().length}/30</p>
+                                    <p style={inlineStyle.legnthP}>{this.state.comment.trim().length}/30</p>
                                 </div>
 
-                                <div className="formControll">
+                                <div className='formControll'>
                                     <Button 
                                         variant='contained'
-                                        color="primary"
-                                        type="submit"
+                                        color='primary'
+                                        type='submit'
                                         className={classes.button}
                                     >
                                         Send
@@ -269,8 +299,8 @@ class Contact extends Component {
                             </form> 
                         </div>
                     </div>
-                    <div id="contact_svg">
-                        <img alt="" src={require('../../../static/img/contact.svg')} />
+                    <div id='contact_svg'>
+                        <img alt='contact' src={ContactSvg} />
                     </div>
                 </div>
             </div>

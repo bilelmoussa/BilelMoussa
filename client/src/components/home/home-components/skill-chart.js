@@ -12,7 +12,7 @@ class SkillChart extends Component {
         super();
         this.state = {
             chart_val: 0,
-            animation: "",
+            animation: '',
         }
     }
 
@@ -21,7 +21,7 @@ class SkillChart extends Component {
             setTimeout(() => {
                 this.setState({
                     chart_val: this.props.value,
-                    animation: "progress 2s linear"
+                    animation: 'progress 2s linear'
                 })
             }, 500);
         }    
@@ -33,7 +33,7 @@ class SkillChart extends Component {
                 return setTimeout(() => {
                     return{
                         chart_val: nextProps.value,
-                        animation: "progress 2s linear"
+                        animation: 'progress 2s linear'
                     }
                 }, 500);
             }else{
@@ -50,7 +50,7 @@ class SkillChart extends Component {
                 setTimeout(() => {
                     this.setState({
                         chart_val: this.props.value,
-                        animation: "progress 2s linear"
+                        animation: 'progress 2s linear'
                     })
                 }, 500);
             }    
