@@ -4,7 +4,7 @@ import AwesomeSliderStyles from 'react-awesome-slider/src/styles';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-import My_projects_svg from '../../static/img/my_projects.svg'
+import My_projects_svg from '../../static/img/my_projects.webp'
 import { Link } from 'react-router-dom';
 import {Helmet} from "react-helmet";
 import Kpi_5 from '../../static/img/KPI_5-min.webp';

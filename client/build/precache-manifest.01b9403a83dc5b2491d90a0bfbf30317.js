@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b699f5c75d9b88eaef01011de9039383",
+    "revision": "969f37643280a667621a53fd40e8e30a",
     "url": "/index.html"
   },
   {
-    "revision": "d625d96411bb6013aefa",
-    "url": "/static/css/2.15bb9cc5.chunk.css"
+    "revision": "472f8d9718c999c602a8",
+    "url": "/static/css/2.709dc122.chunk.css"
   },
   {
-    "revision": "1aef3a5a330bd06790cd",
+    "revision": "1abc0dc57b4043c4c7bb",
     "url": "/static/css/main.c4a4f64d.chunk.css"
   },
   {
-    "revision": "d625d96411bb6013aefa",
-    "url": "/static/js/2.3b440eca.chunk.js"
+    "revision": "472f8d9718c999c602a8",
+    "url": "/static/js/2.8b4c9883.chunk.js"
   },
   {
-    "revision": "1aef3a5a330bd06790cd",
-    "url": "/static/js/main.d57c51f1.chunk.js"
+    "revision": "1abc0dc57b4043c4c7bb",
+    "url": "/static/js/main.ec9c5d78.chunk.js"
   },
   {
     "revision": "0a31ddf7382e0363a369",
@@ -48,12 +48,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/Land_3-min.8c8d77f5.webp"
   },
   {
-    "revision": "b4c08af217dc3bbc824e4b6a8b116015",
-    "url": "/static/media/about_me-min.b4c08af2.jpg"
+    "revision": "99683b40188850d8096c0e0cdb09756c",
+    "url": "/static/media/about_me-min.99683b40.webp"
   },
   {
-    "revision": "2ac9a661a8370d5791ab38d6e68f2a9a",
-    "url": "/static/media/contact.2ac9a661.svg"
+    "revision": "f3a5c9e6971b0d4f94d0c034f5ddd5a7",
+    "url": "/static/media/contact.f3a5c9e6.webp"
   },
   {
     "revision": "9ace7dbdb02c9bf45f61ab5c146f36fe",
@@ -72,8 +72,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/elite4her_5-min.d420fefa.webp"
   },
   {
-    "revision": "a9b6824d01f6b54b14046b7dabd03d7b",
-    "url": "/static/media/my_projects.a9b6824d.svg"
+    "revision": "fabf4a2dc1ea17e3a45564da15240554",
+    "url": "/static/media/my_projects.fabf4a2d.webp"
   },
   {
     "revision": "a329f248ac834aba563bd829a09cd02d",
@@ -96,7 +96,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/nebula_5-min.fac69b19.webp"
   },
   {
-    "revision": "c6f1211c50324596d939114c5ec8e557",
-    "url": "/static/media/welcome-1.c6f1211c.webp"
+    "revision": "911884f156c186982de8dc3ced93046c",
+    "url": "/static/media/welcome_pc.911884f1.webp"
+  },
+  {
+    "revision": "1091e1490cfd87591d269faf1d05b2b5",
+    "url": "/static/media/welcome_pho.1091e149.webp"
   }
 ]);

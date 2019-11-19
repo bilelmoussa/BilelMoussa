@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import Img from '../../static/img/welcome-1.webp';
-import About_me_img from '../../static/img/about_me-min.jpg';
-import My_projects_svg from '../../static/img/my_projects.svg'
+import Pc_img from '../../static/img/welcome_pc.webp';
+import Phone_img from '../../static/img/welcome_pho.webp';
+import About_me_img from '../../static/img/about_me-min.webp';
+import My_projects_svg from '../../static/img/my_projects.webp'
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
@@ -31,6 +32,7 @@ import elite4her_4 from '../../static/img/elite4her_4-min.webp';
 import elite4her_2 from '../../static/img/elite4her_2-min.webp';
 import elite4her_1 from '../../static/img/elite4her_1-min.webp';
 import elite4her_5 from '../../static/img/elite4her_5-min.webp';
+import MediaQuery from 'react-responsive'
 
 
 const Styles = theme => ({
@@ -263,7 +265,12 @@ class Home extends Component {
                 
                 <div id='welcome_section'>
                     <div id='welcome_svg_container'>
-                        <img id='svg_background' alt="welcome img" src={Img} />
+                        <MediaQuery maxWidth={500}>
+                            <img id='svg_background' alt="welcome img" src={Phone_img} />
+                        </MediaQuery>
+                        <MediaQuery minWidth={501}>
+                            <img id='svg_background' alt="welcome img" src={Pc_img} />
+                        </MediaQuery>
                     </div>
                     <div id='welcome_section_content'>
                         <h1 id='welcome_header'>Hi I'm Bilel Moussa</h1> 

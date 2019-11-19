@@ -16,7 +16,7 @@ import CountrySelectReactResponsiveUI from './PhoneSelect';
 import createInput from './PhoneInput';
 import { isValidPhoneNumber, parsePhoneNumber } from 'react-phone-number-input';
 import  { PostMessage } from '../../../actions/apiCalls';
-import ContactSvg from '../../../static/img/contact.svg';
+import ContactSvg from '../../../static/img/contact.webp';
 
 const styles = theme =>({
     label:{
