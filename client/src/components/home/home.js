@@ -32,8 +32,7 @@ import elite4her_4 from '../../static/img/elite4her_4-min.webp';
 import elite4her_2 from '../../static/img/elite4her_2-min.webp';
 import elite4her_1 from '../../static/img/elite4her_1-min.webp';
 import elite4her_5 from '../../static/img/elite4her_5-min.webp';
-import MediaQuery from 'react-responsive'
-
+import MediaQuery from 'react-responsive';
 
 const Styles = theme => ({
     button: {

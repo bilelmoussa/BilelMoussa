@@ -278,6 +278,7 @@ html {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background-color: #fff;
 }
 .imgs_project_box{
     position: relative;
@@ -446,6 +447,18 @@ html {
     font-size: 1rem !important;
     font-weight: bold !important;
 }
+
+.prefix__cls-1{fill:none}
+.prefix__cls-2{fill:#0a3fa4}
+.prefix__cls-3{isolation:isolate}
+.prefix__cls-5{fill:#072e78}
+.prefix__cls-6{fill:#0c50d1}
+.prefix__cls-9{fill:#0c50d0}
+.prefix__cls-16{fill:#08378e}
+.prefix__cls-17{fill:#093b99}
+.prefix__cls-18{fill:#0a43af}
+.prefix__cls-19{fill:#0b47ba}
+.prefix__cls-22{fill:#e5e5e5}
 
 @keyframes progress {
     0% {
@@ -703,16 +716,16 @@ html {
     .formControll{
         margin: 20px auto;
     }
-    #contact_container{
+    #contact_container,  #my_projects_container{
         padding: 0;
     }
-    #contact_svg{
+    #contact_svg, #my_projects_svg{
         display: block;
     }
-    #contact_svg, #contact_svg img{
+    #contact_svg, #contact_svg img,  #my_projects_svg,  #my_projects_svg img{
         width: 100%;
     }
-    #contact_svg img{
+    #contact_svg img,  #my_projects_svg img{
         max-width: 500px;
         margin: 0 auto;
     }
