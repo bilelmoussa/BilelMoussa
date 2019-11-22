@@ -8,7 +8,6 @@ const schema = mongoose.Schema;
 let options = Joi.object({
     user_name: Joi.string().min(3).max(30).required(),
     name: Joi.string().trim().min(1).max(30).required(),
-    email: Joi.string().trim().email().required(),
     role: Joi.string().default('admin').valid('admin', 'staff', 'user').required(),
     password: Joi.string().trim().min(8).required(),
     created_at: Joi.date().default(Date.now()).required(),

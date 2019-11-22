@@ -12,6 +12,31 @@ import { Provider } from 'react-redux';
 import store from './store';
 import Footer from './components/footer/footer';
 import {Helmet} from "react-helmet";
+import setAuthToken from './setAuthToken';
+import { setCurrentUser, logoutUser } from './actions/apiCalls';
+import jwt_decode from 'jwt-decode';
+
+function decodeToken(token) {
+  let decoded = {};
+  try {
+    decoded = jwt_decode(token);
+  } catch (err) {
+    console.log(err)
+    store.dispatch(logoutUser());
+  }
+  return decoded;
+};
+
+if(localStorage.jwtToken) {
+  setAuthToken(localStorage.jwtToken);
+  const decoded = decodeToken(localStorage.jwtToken);
+  store.dispatch(setCurrentUser(decoded));
+  const currentTime = Date.now() / 1000;
+  if(decoded.exp < currentTime) {
+    store.dispatch(logoutUser());
+  }
+}
+
 
 function App() {
   return (

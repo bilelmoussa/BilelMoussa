@@ -3,51 +3,23 @@ const router = express.Router();
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require("../../config/keys");
-const isEmail = require("../../validations/isEmail");
 
 // mongoose user module 
 const User = require('../../models/user');
 
-// register
-router.post("/register", (req, res, next)=>{    
-    let user_name = req.body.user_name;
-    let password = req.body.password;
-    let email = req.body.email;
-    
-    User.getUserByUsername(user_name, (err, user)=>{
-        if(err){
-            console.log('Error : ', err);
-            return res.status(400).json({success: false, msg: "error !"})
-        }
-        else if(user){
-            return res.status(400).json({success: false, msg: "user already exist ! please change your username"});
-        }
-        else if(!isEmail(email)){
-            return res.status(400).json({success: false, msg: "Email is Not Valid !"});
-        }
-        else if(!/^[a-z0-9]+$/i.test(password) || password.length < 8 || !password){
-            return res.status(400).json({success: false, msg: "password must be at leaset 8 characters and contain only alphanumeric"})
-        }
-        else{
-            let newUser = new User({
-                name: req.body.name,
-                email: req.body.email,
-                user_name: req.body.user_name,
-                password: req.body.password,
-            });
-    
-            User.addUser(newUser, (err, user)=>{
-                if(err){
-                    console.log(`Error: `, err);
-                    res.status(400).json({success: false, msg:"server error !", err:err.message})
-                }else{
-                    res.json({success: true, msg:'Regsitered with success', user_id: user._id})
-                };
-            });
-        }
-    })
+let newUser = new User({
+    name: 'bilel moussa',
+    user_name: 'admin',
+    password: 'Opirabilel123',
 });
 
+User.addUser(newUser, (err, user)=>{
+    if(err){
+        console.log(`Error: `, err);
+    }else{
+        console.log('success user', user)
+    };
+});
 
 //log
 router.post("/login", (req, res, next)=>{
@@ -71,7 +43,6 @@ router.post("/login", (req, res, next)=>{
             if(isMatch){
 					let user_token = {
                         _id: user._id,
-                        user_email: user.email,
 						user_name: user.user_name,
 						name: user.name,
 						role: user.role,
@@ -84,7 +55,6 @@ router.post("/login", (req, res, next)=>{
                     token: 'bearer ' +token,
                     user: {
                         userId: user.id,
-                        user_email: user.email,
                         user_name: user.user_name,
 						userRole: user.role,
                     } 
