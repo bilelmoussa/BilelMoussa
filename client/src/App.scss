@@ -245,6 +245,8 @@ html {
     width: 100%;
     margin-top: 4rem;
     max-width: 550px;
+    min-width: 280px;
+    max-height: 580px;
 }
 #my_projects_boxes{
     display: flex;
@@ -378,6 +380,7 @@ html {
     width: 100%;
     margin-top: 4rem;
     max-width: 300px;
+    min-width: 280px;
 }
 .skills_animation{
     -webkit-animation: skills_anim 3s ease-in-out infinite;
@@ -534,8 +537,9 @@ html {
     display: block;
     width: 100%;
     margin-top: 4rem;
-    max-width: 400px;
+    max-width: 500px;
     min-width: 280px;
+    max-height: 580px;
 }
 
 .formControll{
@@ -645,6 +649,12 @@ html {
     .column-2{
         display: none;
     }
+    #contact_svg img{
+        max-height: 500px;
+    }
+    #my_projects_svg img{
+        max-height: 350px;  
+    }
 }
 
 @media(max-width: 600px){
@@ -729,6 +739,8 @@ html {
     #contact_svg img,  #my_projects_svg img{
         max-width: 500px;
         margin: 0 auto;
+        display: block;
+        max-height: 550px;
     }
 }
 
