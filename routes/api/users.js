@@ -7,20 +7,6 @@ const config = require("../../config/keys");
 // mongoose user module 
 const User = require('../../models/user');
 
-let newUser = new User({
-    name: 'bilel moussa',
-    user_name: 'admin',
-    password: 'Opirabilel123',
-});
-
-User.addUser(newUser, (err, user)=>{
-    if(err){
-        console.log(`Error: `, err);
-    }else{
-        console.log('success user', user)
-    };
-});
-
 //log
 router.post("/login", (req, res, next)=>{
     
