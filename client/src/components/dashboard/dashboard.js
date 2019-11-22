@@ -38,6 +38,9 @@ class Dashboard extends Component {
 		if(!this.state.IsLoggedIn) { 
             this.props.history.push('/');
         }
+        if(!this.props.user.user.role === 'admin'){
+            this.props.history.push('/');
+        }
     }
     
     static getDerivedStateFromProps(nextProps, prevState){
@@ -53,6 +56,12 @@ class Dashboard extends Component {
             this.setState({
                 IsLoggedIn: this.props.user.IsLoggedIn
             })
+            if(!this.props.user.IsLoggedIn) { 
+                this.props.history.push('/');
+            }
+            if(!this.props.user.user.role === 'admin'){
+                this.props.history.push('/');
+            }
         }else{
             return null;
         }
@@ -60,7 +69,6 @@ class Dashboard extends Component {
 
     logoutUser(e){
         e.preventDefault();
-        console.log(this.props.history);
         this.props.logoutUser(this.props.history);
     }
 
