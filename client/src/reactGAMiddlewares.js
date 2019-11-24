@@ -1,26 +1,27 @@
-import ReactGA from 'react-ga'
+import ReactGA from 'react-ga';
 
-const options = {}
+const options = {};
 
 const trackPage = (page) => {
   ReactGA.set({
     page,
     ...options
-  })
-  ReactGA.pageview(page)
+  });
+  ReactGA.pageview(page);
 }
 
-let currentPage = ''
+let currentPage = '';
 
 export const googleAnalytics = store => next => action => {
   if (action.type === '@@router/LOCATION_CHANGE') {
-    const nextPage = `${action.payload.location.pathname}${action.payload.location.search}`
+    const nextPage = `${action.payload.location.pathname}${action.payload.location.search}`;
 
     if (currentPage !== nextPage) {
-      currentPage = nextPage
-      trackPage(nextPage)
+      currentPage = nextPage;
+      trackPage(nextPage);
+      console.log('here GA', trackPage());
     }
   }
 
-  return next(action)
+  return next(action);
 }

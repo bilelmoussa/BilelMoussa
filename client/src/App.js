@@ -20,7 +20,7 @@ import ReactGA from 'react-ga';
 
 const history = createBrowserHistory();
 
-ReactGA.initialize('UA-153042401-1')
+ReactGA.initialize('UA-153042401-1', { standardImplementation: true });
 
 const store = configureStore({}, history)
 
