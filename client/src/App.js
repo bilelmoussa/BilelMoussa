@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './components/home/home';
 import Dashboard from './components/dashboard/dashboard';
 import Login from './components/login/login';
-import Register from './components/register/register';
 import PageNotFound from './components/404/page_not_found';
 import contact from './components/contact/contact';
 import projects from './components/projects/projects';
@@ -15,12 +14,10 @@ import {Helmet} from "react-helmet";
 import setAuthToken from './setAuthToken';
 import { setCurrentUser, logoutUser } from './actions/apiCalls';
 import jwt_decode from 'jwt-decode';
-import {createBrowserHistory} from 'history';
-import ReactGA from 'react-ga';
+import { createBrowserHistory } from 'history';
+import withTracker from './withTracker';
 
 const history = createBrowserHistory();
-
-ReactGA.initialize('UA-153042401-1', { standardImplementation: true });
 
 const store = configureStore({}, history)
 
@@ -49,17 +46,6 @@ if(localStorage.jwtToken) {
  class App extends Component{
 
   componentDidMount(){
-    const callback = list => {
-      list.getEntries().forEach(entry => {
-        const Latency = entry.responseStart - entry.requestStart;
-        const DownloadTime = entry.responseEnd - entry.responseStart;
-        const webLoadTime = entry.responseEnd - entry.requestStart;
-        console.log('Total app load time:', entry);
-      })
-    }
-  
-    var observer = new PerformanceObserver(callback);
-    observer.observe({entryTypes: ['navigation'] });
 
   }
 
@@ -74,12 +60,11 @@ if(localStorage.jwtToken) {
             </Helmet>
             <Router>
               <Switch>
-                <Route exact path="/" component={Home} />
+                <Route exact path="/" component={withTracker(Home)} />
                 <Route path="/dashboard" component={Dashboard} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/register" component={Register} />
-                <Route exact path="/contact" component={contact} />
-                <Route exact path="/projects" component={projects} />
+                <Route exact path="/login" component={withTracker(Login)} />
+                <Route exact path="/contact" component={withTracker(contact)} />
+                <Route exact path="/projects" component={withTracker(projects)} />
                 <Route component={PageNotFound} />
               </Switch>
               <Footer />
