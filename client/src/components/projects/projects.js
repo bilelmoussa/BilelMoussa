@@ -70,6 +70,7 @@ const styles = theme => ({
 
 class projects extends Component {
     componentDidMount(){
+
         window.scrollTo(0, 0); 
     }
     

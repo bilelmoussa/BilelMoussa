@@ -33,6 +33,7 @@ import elite4her_2 from '../../static/img/elite4her_2-min.webp';
 import elite4her_1 from '../../static/img/elite4her_1-min.webp';
 import elite4her_5 from '../../static/img/elite4her_5-min.webp';
 import MediaQuery from 'react-responsive';
+import ReactGA from 'react-ga';
 
 const Styles = theme => ({
     button: {
@@ -154,6 +155,7 @@ class Home extends Component {
 
 
     componentDidMount(){
+
         let navData = window.performance.getEntriesByType('navigation');
         if (navData.length > 0 && navData[0].loadEventEnd > 0)
         {
