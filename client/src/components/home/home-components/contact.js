@@ -16,7 +16,7 @@ import CountrySelectReactResponsiveUI from './PhoneSelect';
 import createInput from './PhoneInput';
 import { isValidPhoneNumber, parsePhoneNumber } from 'react-phone-number-input';
 import  { PostMessage } from '../../../actions/apiCalls';
-import ContactSvg from '../../../static/img/contact.webp';
+import ContactSvg from '../../svg_img/ContactSvg';
 
 const styles = theme =>({
     label:{
@@ -300,7 +300,7 @@ class Contact extends Component {
                         </div>
                     </div>
                     <div id='contact_svg'>
-                        <img alt='contact' src={ContactSvg} />
+                        <ContactSvg />
                     </div>
                 </div>
             </div>

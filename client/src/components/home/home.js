@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import Pc_img from '../../static/img/welcome_pc.webp';
-import Phone_img from '../../static/img/welcome_pho.webp';
-import About_me_img from '../../static/img/about_me-min.webp';
-import My_projects_svg from '../../static/img/my_projects.webp'
+import WelcomeSvg from '../../static/img/WelcomeSvg.svg';
+import About_me_img from '../../static/img/about_me.jpg';
+import TabletPhoneSvg from '../svg_img/TabletPhoneSvg';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
@@ -17,22 +16,22 @@ import Card from '@material-ui/core/Card';
 import Contact from './home-components/contact';
 import { GetIpInfo } from '../../actions/apiCalls'
 import {Helmet} from "react-helmet";
-import Kpi_5 from '../../static/img/KPI_5-min.webp';
-import Kpi_1 from '../../static/img/KPI_1-min.webp';
-import Kpi_4 from '../../static/img/KPI_4-min.webp';
-import Land_1 from '../../static/img/Land_1-min.webp';
-import land_2 from '../../static/img/Land_2-min.webp';
-import Land_3 from '../../static/img/Land_3-min.webp';
-import nebula_5 from '../../static/img/nebula_5-min.webp';
-import nebula_1 from '../../static/img/nebula_1-min.webp';
-import nebula_2 from '../../static/img/nebula_2-min.webp';
-import nebula_3 from '../../static/img/nebula_3-min.webp';
-import nebula_4 from '../../static/img/nebula_4-min.webp';
-import elite4her_4 from '../../static/img/elite4her_4-min.webp';
-import elite4her_2 from '../../static/img/elite4her_2-min.webp';
-import elite4her_1 from '../../static/img/elite4her_1-min.webp';
-import elite4her_5 from '../../static/img/elite4her_5-min.webp';
-import MediaQuery from 'react-responsive';
+
+import Kpi_5 from '../../static/img/KPI_5.jpg';
+import Kpi_1 from '../../static/img/KPI_1.jpg';
+import Kpi_4 from '../../static/img/KPI_4.jpg';
+import Land_1 from '../../static/img/Land_1.jpg';
+import land_2 from '../../static/img/Land_2.jpg';
+import Land_3 from '../../static/img/Land_3.jpg';
+import nebula_5 from '../../static/img/nebula_5.jpg';
+import nebula_1 from '../../static/img/nebula_1.jpg';
+import nebula_2 from '../../static/img/nebula_2.jpg';
+import nebula_3 from '../../static/img/nebula_3.jpg';
+import nebula_4 from '../../static/img/nebula_4.jpg';
+import elite4her_4 from '../../static/img/elite4her_4.jpg';
+import elite4her_2 from '../../static/img/elite4her_2.jpg';
+import elite4her_1 from '../../static/img/elite4her_1.jpg';
+import elite4her_5 from '../../static/img/elite4her_5.jpg';
 
 const Styles = theme => ({
     button: {
@@ -265,12 +264,7 @@ class Home extends Component {
                 
                 <div id='welcome_section'>
                     <div id='welcome_svg_container'>
-                        <MediaQuery maxWidth={500}>
-                            <img id='svg_background' alt="welcome img" src={Phone_img} />
-                        </MediaQuery>
-                        <MediaQuery minWidth={501}>
-                            <img id='svg_background' alt="welcome img" src={Pc_img} />
-                        </MediaQuery>
+                        <img id='svg_background' alt="welcome img" src={WelcomeSvg} />
                     </div>
                     <div id='welcome_section_content'>
                         <h1 id='welcome_header'>Hi I'm Bilel Moussa</h1> 
@@ -317,7 +311,7 @@ class Home extends Component {
                             </p>
                         </div>
                         <div id='my_projects_svg'>
-                            <img alt='projects' src={My_projects_svg} />
+                            <TabletPhoneSvg />
                         </div>
                     </div>
 

@@ -241,7 +241,7 @@ html {
     flex-direction: row;
     justify-content: flex-end;
 }
-#my_projects_svg img{
+#my_projects_svg svg{
     width: 100%;
     margin-top: 4rem;
     max-width: 550px;
@@ -533,13 +533,12 @@ html {
     justify-content: flex-end;
 }
 
-#contact_svg img{
+#contact_svg svg{
     display: block;
     width: 100%;
     margin-top: 4rem;
     max-width: 500px;
     min-width: 280px;
-    max-height: 580px;
 }
 
 .formControll{
@@ -733,14 +732,13 @@ html {
     #contact_svg, #my_projects_svg{
         display: block;
     }
-    #contact_svg, #contact_svg img,  #my_projects_svg,  #my_projects_svg img{
+    #contact_svg, #contact_svg svg,  #my_projects_svg,  #my_projects_svg svg{
         width: 100%;
     }
-    #contact_svg img,  #my_projects_svg img{
-        max-width: 500px;
+    #contact_svg svg,  #my_projects_svg svg{
+        max-width: 400px;
         margin: 0 auto;
         display: block;
-        max-height: 550px;
     }
 }
 

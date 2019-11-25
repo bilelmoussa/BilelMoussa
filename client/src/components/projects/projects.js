@@ -4,24 +4,24 @@ import AwesomeSliderStyles from 'react-awesome-slider/src/styles';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-import My_projects_svg from '../../static/img/my_projects.webp'
+import TabletPhoneSvg from '../svg_img/TabletPhoneSvg'
 import { Link } from 'react-router-dom';
 import {Helmet} from "react-helmet";
-import Kpi_5 from '../../static/img/KPI_5-min.webp';
-import Kpi_1 from '../../static/img/KPI_1-min.webp';
-import Kpi_4 from '../../static/img/KPI_4-min.webp';
-import Land_1 from '../../static/img/Land_1-min.webp';
-import Land_2 from '../../static/img/Land_2-min.webp';
-import Land_3 from '../../static/img/Land_3-min.webp';
-import nebula_5 from '../../static/img/nebula_5-min.webp';
-import nebula_1 from '../../static/img/nebula_1-min.webp';
-import nebula_2 from '../../static/img/nebula_2-min.webp';
-import nebula_3 from '../../static/img/nebula_3-min.webp';
-import nebula_4 from '../../static/img/nebula_4-min.webp';
-import elite4her_4 from '../../static/img/elite4her_4-min.webp';
-import elite4her_2 from '../../static/img/elite4her_2-min.webp';
-import elite4her_1 from '../../static/img/elite4her_1-min.webp';
-import elite4her_5 from '../../static/img/elite4her_5-min.webp';
+import Kpi_5 from '../../static/img/KPI_5.jpg';
+import Kpi_1 from '../../static/img/KPI_1.jpg';
+import Kpi_4 from '../../static/img/KPI_4.jpg';
+import Land_1 from '../../static/img/Land_1.jpg';
+import Land_2 from '../../static/img/Land_2.jpg';
+import Land_3 from '../../static/img/Land_3.jpg';
+import nebula_5 from '../../static/img/nebula_5.jpg';
+import nebula_1 from '../../static/img/nebula_1.jpg';
+import nebula_2 from '../../static/img/nebula_2.jpg';
+import nebula_3 from '../../static/img/nebula_3.jpg';
+import nebula_4 from '../../static/img/nebula_4.jpg';
+import elite4her_4 from '../../static/img/elite4her_4.jpg';
+import elite4her_2 from '../../static/img/elite4her_2.jpg';
+import elite4her_1 from '../../static/img/elite4her_1.jpg';
+import elite4her_5 from '../../static/img/elite4her_5.jpg';
 
 const styles = theme => ({
     box_button:{
@@ -101,7 +101,7 @@ class projects extends Component {
                             </p>
                         </div>
                         <div id='my_projects_svg'>
-                            <img alt='projects' src={My_projects_svg} />
+                            <TabletPhoneSvg  />
                         </div>
                     </div>
                     

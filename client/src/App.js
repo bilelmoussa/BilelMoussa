@@ -1,12 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense, lazy  } from 'react';
 import './App.scss';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Home from './components/home/home';
-import Dashboard from './components/dashboard/dashboard';
-import Login from './components/login/login';
-import PageNotFound from './components/404/page_not_found';
-import contact from './components/contact/contact';
-import projects from './components/projects/projects';
 import { Provider } from 'react-redux';
 import configureStore from './store';
 import Footer from './components/footer/footer';
@@ -16,6 +10,14 @@ import { setCurrentUser, logoutUser } from './actions/apiCalls';
 import jwt_decode from 'jwt-decode';
 import { createBrowserHistory } from 'history';
 import withTracker from './withTracker';
+
+
+const Home = lazy(() => import('./components/home/home'));
+const Dashboard = lazy(() => import('./components/dashboard/dashboard'));
+const Login = lazy(() => import('./components/login/login'));
+const PageNotFound = lazy(() => import('./components/404/page_not_found'));
+const contact = lazy(() => import('./components/contact/contact'));
+const projects = lazy(() => import('./components/projects/projects'));
 
 const history = createBrowserHistory();
 
@@ -59,15 +61,17 @@ if(localStorage.jwtToken) {
                     <link rel="canonical" href="https://bilel-moussa.herokuapp.com" />
             </Helmet>
             <Router>
-              <Switch>
-                <Route exact path="/" component={withTracker(Home)} />
-                <Route path="/dashboard" component={Dashboard} />
-                <Route exact path="/login" component={withTracker(Login)} />
-                <Route exact path="/contact" component={withTracker(contact)} />
-                <Route exact path="/projects" component={withTracker(projects)} />
-                <Route component={PageNotFound} />
-              </Switch>
-              <Footer />
+              <Suspense fallback={<div></div>}>
+                <Switch>
+                  <Route exact path="/" component={withTracker(Home)} />
+                  <Route path="/dashboard" component={Dashboard} />
+                  <Route exact path="/login" component={withTracker(Login)} />
+                  <Route exact path="/contact" component={withTracker(contact)} />
+                  <Route exact path="/projects" component={withTracker(projects)} />
+                  <Route component={PageNotFound} />
+                </Switch>
+                <Footer />
+              </Suspense>
             </Router>
           </div>
       </Provider>
