@@ -30,9 +30,18 @@ export const GetIpInfo = () => dispatch =>{
             type: IPINFO,
             payload: res.data
         })
+        const IpStringify = JSON.stringify(res.data);
+        localStorage.setItem('IpApi', IpStringify);
     })
     .catch(err=>{
         console.log(err);
+    })
+}
+
+export const GetLocalIpInfo = (IpInfo) => dispatch =>{
+    dispatch({
+        type: IPINFO,
+        payload: IpInfo
     })
 }
 

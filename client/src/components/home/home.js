@@ -14,7 +14,7 @@ import ScrollableAnchor from 'react-scrollable-anchor';
 import SkillChart from './home-components/skill-chart';
 import Card from '@material-ui/core/Card';
 import Contact from './home-components/contact';
-import { GetIpInfo } from '../../actions/apiCalls'
+import { GetIpInfo, GetLocalIpInfo } from '../../actions/apiCalls'
 import {Helmet} from "react-helmet";
 
 import Kpi_5 from '../../static/img/KPI_5.jpg';
@@ -128,6 +128,8 @@ const Styles = theme => ({
 });
 
 
+
+
 class Home extends Component {
     constructor(){
         super();
@@ -161,7 +163,15 @@ class Home extends Component {
         } else {
             window.addEventListener('load', this.handleLoad);
         }
-        this.props.GetIpInfo();
+
+        if(!localStorage.IpApi){
+            this.props.GetIpInfo();
+        }else{
+            const IpApi = localStorage.IpApi;
+            const parseIpApi = JSON.parse(IpApi);
+            this.props.GetLocalIpInfo(parseIpApi);
+        }
+
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -470,10 +480,12 @@ class Home extends Component {
 Home.propTypes = {
     classes: PropTypes.object.isRequired,
     ipinfo: PropTypes.object.isRequired,
+    GetIpInfo: PropTypes.func.isRequired,
+    GetLocalIpInfo: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => ({
 	ipinfo: state.ipinfo,
 })
 
-export default connect(mapStateToProps, {GetIpInfo})(withStyles(Styles)(Home));
+export default connect(mapStateToProps, {GetIpInfo, GetLocalIpInfo})(withStyles(Styles)(Home));
