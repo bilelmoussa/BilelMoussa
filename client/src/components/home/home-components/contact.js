@@ -19,6 +19,54 @@ import  { PostMessage } from '../../../actions/apiCalls';
 import ContactSvg from '../../svg_img/ContactSvg';
 
 const styles = theme =>({
+    ContactSection:{
+        display: 'flex',
+        flexDirection: 'column',
+        maxWidth: 2500,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+    },
+    ContactContainer:{
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        padding: '1rem',
+        justifyContent: 'center',
+    },
+    ContactContent:{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        width: '45%',
+        margin: '1rem 0',
+    },
+    ContactContentHeader:{
+        color: '#72b6ff',
+        textTransform: 'capitalize',
+        marginBottom: '2rem',
+    },
+    ContactformControll:{
+        display: 'flex',
+        margin: '20px 0',
+        flexDirection: 'column',
+        width: '50%;',
+        minWidth: 250,
+        maxWidth: 400,
+    },
+    ContactImgContainer:{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        width: '45%',
+        margin: '1rem 0',
+    },
+    ContactImg:{
+        display: 'block',
+        width: '100%',
+        marginTop: '4rem',
+        maxWidth: 500,
+        minWidth: 280,
+    },
     label:{
         textTransform: 'uppercase',
         letterSpacing: 1,
@@ -51,13 +99,14 @@ const styles = theme =>({
             backgroundColor: '#357ac5',
             borderColor: '#357ac5'
         }
-    }
-});
-
-const inlineStyle = {
+    },
     msgformControll: {
         display: 'flex', 
-        flexDirection: 'column'   
+        flexDirection: 'column',
+        margin: '20px 0',
+        width: '50%;',
+        minWidth: 250,
+        maxWidth: 400,   
     },
     errP:{
         color: '#fff',
@@ -86,17 +135,48 @@ const inlineStyle = {
     legnthP:{
         textAlign: 'right',
         margin: '10px 0'
-    } 
-}
+    },
+    '@media(max-width: 1120px)':{
+        ContactImg:{
+            maxHeight: 500, 
+        }
+    },
+    '@media(max-width: 770px)':{
+        ContactContainer:{
+            flexDirection: 'column',
+            alignItems: 'center',
+            padding: 0,
+        },
+        ContactContent:{
+            width: '90%'
+        },
+        ContactformControll:{
+            margin: '20px auto',
+        },
+        ContactImgContainer:{
+            display: 'block',
+            width: '100%',
+        },
+        ContactImg:{
+            display: 'block',
+            width: '90%',
+            maxWidth: 400,
+            margin: '0 auto',
+        }
+
+    }
+});
+
+
 
 const RenderErr = (errors, classes) =>{
     if(empty(errors)){
         return(null);
     }else{
         return (
-            <div className={classes.formControll} style={inlineStyle.msgformControll}>
+            <div className={classes.msgformControll}>
                 {errors.map((err, i)=>{
-                    return(<p style={inlineStyle.errP} key={i}>{err}</p>);
+                    return(<p className={classes.errP} key={i}>{err}</p>);
                 })}
             </div>
         )
@@ -108,9 +188,9 @@ const RenderSuccessMsg = (success_msg, classes) =>{
         return(null);
     }else{
         return (
-            <div className={classes.formControll} style={inlineStyle.msgformControll}>
+            <div className={classes.msgformControll} >
                 {success_msg.map((msg, i)=>{
-                    return(<p style={inlineStyle.sucsP} key={i}>{msg}</p>);
+                    return(<p className={classes.sucsP} key={i}>{msg}</p>);
                 })}
             </div>
         )
@@ -226,18 +306,18 @@ class Contact extends Component {
         const  { errors, success_msg, country } = this.state;
 
         return (
-            <div id='contact_section'>
-                <div id='contact_container'>
-                    <div id='contact_content'>
-                        <div id='contact_header'>
+            <div className={classes.ContactSection}>
+                <div className={classes.ContactContainer}>
+                    <div className={classes.ContactContent}>
+                        <div className={classes.ContactContentHeader}>
                             <h1>Contact Form</h1>
                         </div>
                         {RenderErr(errors, classes)}
                         {RenderSuccessMsg(success_msg, classes)}
-                        <div id='contact_form'>
-                            <form style={inlineStyle.form} onSubmit={this.handeleSubmit}>
+                        <div>
+                            <form className={classes.form} onSubmit={this.handeleSubmit}>
 
-                                <div className='formControll'>
+                                <div className={classes.ContactformControll}>
                                     <label className={classes.label}>Full name :</label>
                                     <Input
                                         required
@@ -247,7 +327,7 @@ class Contact extends Component {
                                     />
                                 </div>
 
-                                <div className='formControll'>
+                                <div className={classes.ContactformControll}>
                                     <label className={classes.label}>Phone Number :</label>
                                     <PhoneInput
                                         inputComponent={createInput}
@@ -262,7 +342,7 @@ class Contact extends Component {
                                     />
                                 </div>
 
-                                <div className='formControll'>
+                                <div className={classes.ContactformControll}>
                                     <label className={classes.label}>Email :</label>
                                     <Input
                                         type="email"
@@ -273,7 +353,7 @@ class Contact extends Component {
                                     />
                                 </div>
 
-                                <div className='formControll'>
+                                <div className={classes.ContactformControll}>
                                     <label className={classes.label}>Comments/Questions :</label>
                                     <Input
                                         multiline
@@ -283,10 +363,10 @@ class Contact extends Component {
                                         onChange={this.handleChange('comment')}
                                         className={classes.input}
                                     />
-                                    <p style={inlineStyle.legnthP}>{this.state.comment.trim().length}/30</p>
+                                    <p className={classes.legnthP}>{this.state.comment.trim().length}/30</p>
                                 </div>
 
-                                <div className='formControll'>
+                                <div className={classes.ContactformControll}>
                                     <Button 
                                         variant='contained'
                                         color='primary'
@@ -299,8 +379,8 @@ class Contact extends Component {
                             </form> 
                         </div>
                     </div>
-                    <div id='contact_svg'>
-                        <ContactSvg />
+                    <div className={classes.ContactImgContainer}>
+                        <ContactSvg className={classes.ContactImg} />
                     </div>
                 </div>
             </div>

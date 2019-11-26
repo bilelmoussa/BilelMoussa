@@ -1,51 +1,30 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import AwesomeSlider from 'react-awesome-slider';
 import AwesomeSliderStyles from 'react-awesome-slider/src/styles';
-import TabletPhoneSvg from '../svg_img/TabletPhoneSvg';
-import { Link } from 'react-router-dom';
-import {Helmet} from "react-helmet";
+import TabletPhoneSvg from '../../svg_img/TabletPhoneSvg';
 
-import Kpi_5 from '../../static/img/KPI_5.jpg';
-import Kpi_1 from '../../static/img/KPI_1.jpg';
-import Kpi_4 from '../../static/img/KPI_4.jpg';
-import Land_1 from '../../static/img/Land_1.jpg';
-import land_2 from '../../static/img/Land_2.jpg';
-import Land_3 from '../../static/img/Land_3.jpg';
-import nebula_5 from '../../static/img/nebula_5.jpg';
-import nebula_1 from '../../static/img/nebula_1.jpg';
-import nebula_2 from '../../static/img/nebula_2.jpg';
-import nebula_3 from '../../static/img/nebula_3.jpg';
-import nebula_4 from '../../static/img/nebula_4.jpg';
-import elite4her_4 from '../../static/img/elite4her_4.jpg';
-import elite4her_2 from '../../static/img/elite4her_2.jpg';
-import elite4her_1 from '../../static/img/elite4her_1.jpg';
-import elite4her_5 from '../../static/img/elite4her_5.jpg';
+
+import Kpi_5 from '../../../static/img/KPI_5.jpg';
+import Kpi_1 from '../../../static/img/KPI_1.jpg';
+import Kpi_4 from '../../../static/img/KPI_4.jpg';
+import Land_1 from '../../../static/img/Land_1.jpg';
+import land_2 from '../../../static/img/Land_2.jpg';
+import Land_3 from '../../../static/img/Land_3.jpg';
+import nebula_5 from '../../../static/img/nebula_5.jpg';
+import nebula_1 from '../../../static/img/nebula_1.jpg';
+import nebula_2 from '../../../static/img/nebula_2.jpg';
+import nebula_3 from '../../../static/img/nebula_3.jpg';
+import nebula_4 from '../../../static/img/nebula_4.jpg';
+import elite4her_4 from '../../../static/img/elite4her_4.jpg';
+import elite4her_2 from '../../../static/img/elite4her_2.jpg';
+import elite4her_1 from '../../../static/img/elite4her_1.jpg';
+import elite4her_5 from '../../../static/img/elite4her_5.jpg';
 
 const Styles = theme =>({
-    button: {
-        boxShadow: 'none',
-        margin: theme.spacing(1),
-        backgroundColor: "#419aff",
-        borderColor: '#419aff',
-        color: "#fff",
-        borderBottom: "3px solid #357ac5",
-        '&:hover':{
-            backgroundColor: "#357ac5",
-            borderColor: "#357ac5"
-        },
-        '&active':{
-            boxShadow: 'none',
-            backgroundColor: "#357ac5",
-            borderColor: "#357ac5"
-        }  
-    },
-    goBackContainer:{
-        display: "flex",
-        margin: "1rem 2rem"
-    },
     MyProjectsSection:{
         overflow: 'hidden',
         display: 'flex',
@@ -189,6 +168,11 @@ const Styles = theme =>({
         '--loader-bar-color': '#419aff !important',
         '--loader-bar-height': '6px !important',
     },
+    MoreButtonContainer:{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
     more_button:{
         boxShadow: 'none',
         margin: theme.spacing(1),
@@ -243,22 +227,11 @@ const Styles = theme =>({
     }
 })
 
-export class Projects extends Component {
+export class MyProjects extends Component {
     render() {
         const{classes} = this.props;
         return (
             <div>
-
-                 <Helmet>
-                    <title>Bilel Moussa | Projects</title>
-                    <meta name='description' content='Bilel Moussa Projects Page' />
-                    <meta name='keywords' content='Web Developer Projects, UI/UX Projects, Web Designer Projects, Web Developer Works' />
-                </Helmet>
-
-                <div className={classes.goBackContainer}>
-                    <Button variant="contained" className={classes.button} component={Link} to={`/`}>Go Back Home</Button>
-                </div>
-
                 <div className={classes.MyProjectsSection}>
 
                     <div className={classes.MyProjectsContainer}>
@@ -371,6 +344,10 @@ export class Projects extends Component {
                 
                 </div>
 
+                    <div className={classes.MoreButtonContainer}>
+                        <Button variant='contained' className={classes.more_button} component={Link} to={`/projects`} >More Projects</Button>
+                    </div>
+
                 </div>
             </div>
         )
@@ -378,8 +355,8 @@ export class Projects extends Component {
 }
 
 
-Projects.propTypes = {
+MyProjects.propTypes = {
     classes: PropTypes.object.isRequired,   
 }
 
-export default withStyles(Styles)(Projects)
+export default withStyles(Styles)(MyProjects)

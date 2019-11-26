@@ -8,6 +8,15 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 const styles = theme => ({ 
+    FooterSection:{
+        display: 'flex',
+        overflow: 'hidden',
+        flexDirection: 'column',
+        width: '100%',
+        marginTop: 40,
+        position: 'relative',
+        minWidth: 300
+    },
     footer:{
         marginTop: 100,
         marginBottom: 40,
@@ -21,7 +30,13 @@ const styles = theme => ({
           flexDirection: 'column'
         },
       },
-    
+      FooterSvg:{
+        position: 'absolute',
+        height: 1000,
+        minWidth: 1000,
+        width: '100%',
+        zIndex: -1,
+      },
       Footer_List_Text:{
         letterSpacing: 2,
         fontFamily: "'Orbitron', sans-serif;",
@@ -55,6 +70,13 @@ const styles = theme => ({
         fontFamily: "'Orbitron', sans-serif",
         padding: 8,
         borderRadius: 5,
+      },
+      Copyright:{
+        display: 'block',
+        color: '#ffffff',
+        textAlign: 'center',
+        fontSize: '1.3rem',
+        marginBottom: '20px',
       }
 })
 
@@ -62,8 +84,8 @@ class Footer extends Component {
     render() {
         const {classes} = this.props;
         return (
-            <div className='Footer'>
-                <FooterSvg />
+            <div className={classes.FooterSection}>
+                <FooterSvg className={classes.FooterSvg}/>
                 <div className={classes.footer}>
                     <List className={classes.ListMenu}>
                         <h3 className={classes.List_Name}>useful links</h3>          
@@ -102,7 +124,7 @@ class Footer extends Component {
                     </List>
 
                 </div>
-                <div id="copyright">
+                <div className={classes.Copyright}>
                   Bilel Moussa, Copyright &copy; 	{new Date().getFullYear()}
                 </div>
             </div>

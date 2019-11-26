@@ -125,14 +125,11 @@ const styles = theme =>({
         backgroundColor: "#357ac5",
         borderColor: "#357ac5"
     }  
-},
-goBackContainer:{
-    display: "flex",
-    margin: "1rem 2rem"
-}
-});
-
-const inlineStyle = {
+    },
+    goBackContainer:{
+        display: "flex",
+        margin: "1rem 2rem"
+    },
     ErrContainer: {
         width: '70%',
         maxWidth: '700',
@@ -149,15 +146,17 @@ const inlineStyle = {
         fontSize: 14,
         letterSpacing: 1
     }
-}
+});
 
-const RenderErrorMsg = (ErrorMsg) =>{
+
+
+const RenderErrorMsg = (ErrorMsg, classes) =>{
     if(empty(ErrorMsg)){
         return null;
     }else{
         return(
-            <div style={inlineStyle.ErrContainer}>
-                <p style={inlineStyle.ErrP}>{ErrorMsg}</p>
+            <div className={classes.ErrContainer}>
+                <p className={classes.ErrP}>{ErrorMsg}</p>
             </div>
         )
     }
@@ -246,7 +245,7 @@ class Login extends Component {
         const {ErrorMsg} = this.state;
 
         return(
-            <div className="container_route">
+            <div>
                 <div className={classes.goBackContainer}>
                     <Button variant="contained" className={classes.goBackButton} component={Link} to={`/`}>Go Back Home</Button>
                 </div>
@@ -256,7 +255,7 @@ class Login extends Component {
                             <AccountCircle className={classes.AccountCircle}/>
                         </div>
                         <form className={classes.form} onSubmit={this.handleSubmit}>
-                            {RenderErrorMsg(ErrorMsg)}
+                            {RenderErrorMsg(ErrorMsg, classes)}
                             <TextField 
                                 required
                                 classes={{root: classes.textField}} 

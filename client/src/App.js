@@ -17,7 +17,7 @@ const Dashboard = lazy(() => import('./components/dashboard/dashboard'));
 const Login = lazy(() => import('./components/login/login'));
 const PageNotFound = lazy(() => import('./components/404/page_not_found'));
 const contact = lazy(() => import('./components/contact/contact'));
-const projects = lazy(() => import('./components/projects/projects'));
+const Projects = lazy(() => import('./components/projects/projects'));
 
 const history = createBrowserHistory();
 
@@ -67,7 +67,7 @@ if(localStorage.jwtToken) {
                   <Route path="/dashboard" component={Dashboard} />
                   <Route exact path="/login" component={withTracker(Login)} />
                   <Route exact path="/contact" component={withTracker(contact)} />
-                  <Route exact path="/projects" component={withTracker(projects)} />
+                  <Route exact path="/projects" component={withTracker(Projects)} />
                   <Route component={PageNotFound} />
                 </Switch>
                 <Footer />
