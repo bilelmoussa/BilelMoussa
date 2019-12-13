@@ -8,6 +8,8 @@ import TabletPhoneSvg from '../svg_img/TabletPhoneSvg';
 import { Link } from 'react-router-dom';
 import {Helmet} from "react-helmet";
 
+import Footer from '../footer/footer';
+
 import Kpi_5 from '../../static/img/KPI_5.jpg';
 import Kpi_1 from '../../static/img/KPI_1.jpg';
 import Kpi_4 from '../../static/img/KPI_4.jpg';
@@ -372,6 +374,8 @@ export class Projects extends Component {
                 </div>
 
                 </div>
+
+                <Footer />
             </div>
         )
     }

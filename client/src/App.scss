@@ -41,6 +41,32 @@ html {
     padding-right: 0 !important
 }
 
+/* ------------------- Dashboard Chart ---------------- */
+
+
+.overlay {
+  fill: none;
+  pointer-events: all;
+  transition: 0.5s ease-in;
+}
+
+.focus circle {
+  fill: steelblue;
+}
+
+.focus text {
+  font-size: 14px;
+}
+
+.tooltip {
+  fill: white;
+  stroke: #000;
+}
+
+.tooltip-date, .tooltip-likes {
+  font-weight: bold;
+}
+
 
 @keyframes skills_anim{
     0%{

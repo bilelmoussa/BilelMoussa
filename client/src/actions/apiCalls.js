@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { MSG_RES, IPINFO, SET_CURRENT_USER, LOG_ERRORS} from './types';
+import { MSG_RES, IPINFO, SET_CURRENT_USER, LOG_ERRORS, GA_USERS, GA_NEW_USERS, GA_PAGE_VIEWS, GA_SESSIONS, GA_USERS_METRICS, DRAWER_CLOSED} from './types';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from '../setAuthToken';
 
@@ -7,7 +7,6 @@ import setAuthToken from '../setAuthToken';
 export const PostMessage = (message) => dispatch =>{
     axios.post('/api/message/post_message', message)
         .then(res=>{
-            console.log(res);
             dispatch({
                 type: MSG_RES,
                 payload: res.data
@@ -15,7 +14,6 @@ export const PostMessage = (message) => dispatch =>{
         })
         .catch(err => {
             console.log(err);
-            console.log(err.response);
             dispatch({
                 type: MSG_RES,
                 payload: err.response.data
@@ -85,4 +83,77 @@ export const setCurrentUser = user => {
         type: SET_CURRENT_USER,
         payload: user
     }
+}
+
+export const GetGaUsers = date => dispatch =>{
+    axios.get(`/api/ga/users?startDate=${date.startDate}&endDate=${date.endDate}`)
+    .then(res =>{
+        dispatch({
+            type: GA_USERS,
+            payload: res.data.data
+        })
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+}
+
+export const GetGaNewUsers = date => dispatch =>{
+    axios.get(`/api/ga/newusers?startDate=${date.startDate}&endDate=${date.endDate}`)
+    .then(res =>{
+        dispatch({
+            type: GA_NEW_USERS,
+            payload: res.data.data
+        })
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+}
+
+export const GetGaPageViews= date => dispatch =>{
+    axios.get(`/api/ga/pageviews?startDate=${date.startDate}&endDate=${date.endDate}`)
+    .then(res =>{
+        dispatch({
+            type: GA_PAGE_VIEWS,
+            payload: res.data.data
+        })
+        
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+}
+
+export const GetGaSessions= date => dispatch =>{
+    axios.get(`/api/ga/sessions?startDate=${date.startDate}&endDate=${date.endDate}`)
+    .then(res =>{
+        dispatch({
+            type: GA_SESSIONS,
+            payload: res.data.data
+        })
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+}
+
+export const GetGaUsersMetrcis= date => dispatch =>{
+    axios.get(`/api/ga/usersmetrics?startDate=${date.startDate}&endDate=${date.endDate}`)
+    .then(res =>{
+        dispatch({
+            type: GA_USERS_METRICS,
+            payload: res.data.data
+        })
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+}
+
+export const handleDrawertoggle = action => dispatch =>{
+    dispatch({
+        type: DRAWER_CLOSED,
+        payload: action
+    })
 }

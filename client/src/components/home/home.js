@@ -11,6 +11,7 @@ import AboutMe from './home-components/AboutMe';
 import MyProjects from './home-components/MyProjects'
 import Skills from './home-components/Skills'
 
+import Footer from '../footer/footer';
 
 
 const Styles = theme => ({
@@ -92,7 +93,7 @@ class Home extends Component {
                 
                 <Contact />
                 
-
+                <Footer />
             </div>   
         );
     }

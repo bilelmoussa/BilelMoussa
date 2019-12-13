@@ -3,7 +3,6 @@ import './App.scss';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import configureStore from './store';
-import Footer from './components/footer/footer';
 import {Helmet} from "react-helmet";
 import setAuthToken from './setAuthToken';
 import { setCurrentUser, logoutUser } from './actions/apiCalls';
@@ -70,7 +69,6 @@ if(localStorage.jwtToken) {
                   <Route exact path="/projects" component={withTracker(Projects)} />
                   <Route component={PageNotFound} />
                 </Switch>
-                <Footer />
               </Suspense>
             </Router>
           </div>

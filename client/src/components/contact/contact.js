@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import {Helmet} from "react-helmet";
+import Footer from '../footer/footer';
 
 const Styles = theme => ({
     button: {
@@ -48,6 +49,7 @@ class contact extends Component {
                     <Button variant="contained" className={classes.button} component={Link} to={`/`}>Go Back Home</Button>
                 </div>
                 <Contact />
+                <Footer />
             </div>
         )
     }

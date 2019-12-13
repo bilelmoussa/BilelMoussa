@@ -7,7 +7,8 @@ const os = require('os');
 const path = require('path');
 const mongoose = require('mongoose');
 const passport = require("passport");
-var compression = require('compression')
+const compression = require('compression');
+const GoogleAnalytics = require('./routes/api/GoogleAnalytics');
 
 let  address;
 let ifaces = os.networkInterfaces();
@@ -74,13 +75,16 @@ require('./config/passport')(passport);
 
 app.use('/api/user', user);
 app.use('/api/message', message);
+app.use('/api/ga', GoogleAnalytics);
 
+/*
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 
 app.get('*', (req,res) =>{
     res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
+*/
 
 // Port    
 const port = process.env.PORT || 5000;

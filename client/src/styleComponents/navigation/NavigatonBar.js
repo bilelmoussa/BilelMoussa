@@ -28,6 +28,8 @@ import Button from '@material-ui/core/Button';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 const drawerWidth = 240;
+const closedDrawerWidth = 53;
+const closedDrawerWidthSm = 73
 
 const theme = createMuiTheme({
 });
@@ -76,9 +78,9 @@ const styles = theme => ({
           duration: theme.transitions.duration.leavingScreen,
         }),
         overflowX: 'hidden',
-        width: theme.spacing(7) + 1,
+        width: closedDrawerWidth,
         [theme.breakpoints.up('sm')]: {
-          width: theme.spacing(9) + 1,
+          width: closedDrawerWidthSm,
         },
     },
     toolbar: {
@@ -138,6 +140,7 @@ class NavigatonBar extends Component {
     };
     
     handleDrawerOpen = () =>{
+        this.props.handleDrawertoggle(true);
         this.setState({open: true});
     }
 
@@ -146,6 +149,7 @@ class NavigatonBar extends Component {
     };
 
     handleDrawerClose = () =>{
+        this.props.handleDrawertoggle(false);
         this.setState({open: false})
     }
 
@@ -176,9 +180,7 @@ class NavigatonBar extends Component {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
-            Dashboard
-          </Typography>
+
           <div className={classes.grow} />
 
                 <div className={classes.sectionDesktop}>
@@ -261,7 +263,8 @@ class NavigatonBar extends Component {
 NavigatonBar.propTypes = {
     classes: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired,
-    LogoutUser: PropTypes.func.isRequired
+    LogoutUser: PropTypes.func.isRequired,
+    handleDrawertoggle: PropTypes.func.isRequired
 }
 
 export default withStyles(styles)(NavigatonBar);
