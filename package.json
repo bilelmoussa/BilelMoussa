@@ -31,15 +31,16 @@
     "express": "^4.17.1",
     "express-rate-limit": "^5.0.0",
     "google-libphonenumber": "^3.2.6",
+    "googleapis": "^45.0.0",
     "helmet": "^3.21.1",
     "joi": "^14.3.1",
     "joigoose": "^4.0.8",
     "jsonwebtoken": "^8.5.1",
+    "moment": "^2.24.0",
     "mongoose": "^5.7.7",
     "nodemailer": "^6.3.1",
     "passport": "^0.4.0",
-    "passport-jwt": "^4.0.0",
-    "react-helmet": "^5.2.1"
+    "passport-jwt": "^4.0.0"
   },
   "devDependencies": {
     "nodemon": "^1.19.4"

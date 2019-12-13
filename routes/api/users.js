@@ -36,7 +36,7 @@ router.post("/login", (req, res, next)=>{
 					}
                     const token = jwt.sign(user_token, config.secret, {
                     expiresIn: 90000, 
-                  });
+                    });
                return res.json({
                     success: true,
                     token: 'bearer ' +token,
