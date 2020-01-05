@@ -170,7 +170,7 @@ class Dashboard extends Component {
                     </div>
                     <div className={classes.ChartBoxs}>
                         {this.RenderLineChart()}
-                        <GeoChart SharedStyle={this.props.SharedStyle} />
+                        <GeoChart SharedStyle={SharedStyle} />
                     </div>
                 </main> 
             </div>
