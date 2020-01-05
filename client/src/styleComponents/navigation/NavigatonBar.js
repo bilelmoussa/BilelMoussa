@@ -6,7 +6,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -140,7 +139,9 @@ class NavigatonBar extends Component {
     };
     
     handleDrawerOpen = () =>{
-        this.props.handleDrawertoggle(true);
+        setTimeout(() => {
+            this.props.handleDrawertoggle(true);
+        }, 195);
         this.setState({open: true});
     }
 
@@ -149,7 +150,9 @@ class NavigatonBar extends Component {
     };
 
     handleDrawerClose = () =>{
-        this.props.handleDrawertoggle(false);
+        setTimeout(() => {
+            this.props.handleDrawertoggle(false);
+        }, 225);
         this.setState({open: false})
     }
 

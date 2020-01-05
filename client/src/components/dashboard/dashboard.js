@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import NavigatonBar from '../../styleComponents/navigation/NavigatonBar';
+import moment from 'moment';
 import { withStyles } from '@material-ui/core/styles';
 import { logoutUser, GetGaUsers, GetGaNewUsers, GetGaPageViews, GetGaSessions, GetGaUsersMetrcis, handleDrawertoggle } from '../../actions/apiCalls';
+
+import NavigatonBar from '../../styleComponents/navigation/NavigatonBar';
 import LineChart from './charts/LineChart';
 import UsersCount from './charts/UsersCount';
 import NewUsersCount from './charts/NewUsersCount';
 import PageViewsCount from './charts/PageViewsCount';
-import SessionsCount from './charts/SessionsCount'
-import moment from 'moment';
+import SessionsCount from './charts/SessionsCount';
+import GeoChart from './charts/GeoChart';
 
 const styles = theme => ({
     root:{
@@ -32,7 +34,7 @@ const styles = theme => ({
     },
     content: {
         flexGrow: 1,
-        padding: theme.spacing(3),
+        margin:  theme.spacing(2),
         overflow: "auto"
     },
     dashRootH1:{
@@ -44,6 +46,12 @@ const styles = theme => ({
         color: "#4a4a4a",
         lineHeight: "1.5em"
     },
+    ChartBoxs:{
+        display: "flex",
+        flexDirection: "row",
+        flexWrap: "wrap",
+        maxWidth: 2000
+    }
 })
 
 
@@ -54,10 +62,21 @@ class Dashboard extends Component {
         this.state = {
             IsLoggedIn: false,
             user: '',
+            GaMonthlyDate: {},
+            GaWeeklyDate: {}
         }
     }
 
     componentDidMount() {
+        this.setState({IsLoggedIn: this.props.user.IsLoggedIn})   
+		if(!this.props.user.IsLoggedIn) { 
+            this.props.history.push('/');
+        }
+        if(!this.props.user.user.role === 'admin'){
+            this.props.history.push('/');
+        }
+
+
         let last7days = moment().subtract(7, 'days').format("YYYY-MM-DD");
         let lastMonth = moment().subtract(28, 'days').format("YYYY-MM-DD");
         let yesterday = moment().subtract(1, 'days').format("YYYY-MM-DD");
@@ -72,19 +91,24 @@ class Dashboard extends Component {
             endDate: yesterday
         }
 
-        this.props.GetGaUsers(GaMonthlyDate);
-        this.props.GetGaNewUsers(GaWeeklyDate);
-        this.props.GetGaPageViews(GaMonthlyDate);
-        this.props.GetGaSessions(GaMonthlyDate);
-        this.props.GetGaUsersMetrcis(GaMonthlyDate);
+        this.setState({GaMonthlyDate: GaMonthlyDate, GaWeeklyDate: GaWeeklyDate});
 
-        this.setState({IsLoggedIn: this.props.user.IsLoggedIn})   
-		if(!this.state.IsLoggedIn) { 
-            this.props.history.push('/');
+        if(this.props.Ga.GaUsers === '-'){
+            this.props.GetGaUsers(GaMonthlyDate);
         }
-        if(!this.props.user.user.role === 'admin'){
-            this.props.history.push('/');
+        if(this.props.Ga.GaNewUsers === '-'){
+            this.props.GetGaNewUsers(GaWeeklyDate);
         }
+        if(this.props.Ga.GaPageViews === '-'){
+            this.props.GetGaPageViews(GaMonthlyDate);
+        }
+        if(this.props.Ga.GaSessions === '-'){
+            this.props.GetGaSessions(GaMonthlyDate);
+        }
+        if(this.props.Ga.GaUsersMetrics.length === 0){
+            this.props.GetGaUsersMetrcis(GaMonthlyDate);
+        }
+        
     }
     
     static getDerivedStateFromProps(nextProps, prevState){
@@ -116,9 +140,20 @@ class Dashboard extends Component {
         this.props.logoutUser(this.props.history);
     }   
 
+    RenderLineChart = (data) =>{
+        const{Ga, SharedStyle} = this.props;
+        if(Ga.GaUsersMetrics.length > 0){
+            return(
+                <LineChart SharedStyle={SharedStyle} data={Ga.GaUsersMetrics} />
+            )
+        }else{
+            return null;
+        }
+    }
 
     render(){
-        const{classes, user, Ga} = this.props;
+        const{classes, user, Ga, SharedStyle} = this.props;
+        
         return(
             <div className={classes.root}>
                 <NavigatonBar LogoutUser={this.logoutUser.bind(this)} handleDrawertoggle={this.props.handleDrawertoggle} user={user}  />
@@ -133,7 +168,10 @@ class Dashboard extends Component {
                         <PageViewsCount PageViews={Ga.GaPageViews}/>
                         <SessionsCount Sessions={Ga.GaSessions}/>
                     </div>
-                    <LineChart SharedStyle={this.props.SharedStyle} data={Ga.GaUsersMetrics}/>
+                    <div className={classes.ChartBoxs}>
+                        {this.RenderLineChart()}
+                        <GeoChart SharedStyle={this.props.SharedStyle} />
+                    </div>
                 </main> 
             </div>
         );
