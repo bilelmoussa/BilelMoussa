@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const { google } = require('googleapis');
-//const service_account = require('../../MyFirstProject-1caccd5a6e7b.json');
+const service_account = require('../../GAKeys.json');
 
 const scopes = ['https://www.googleapis.com/auth/analytics.readonly'];
 
 const reporting = google.analyticsreporting('v4');
 
-//const jwt = new  google.auth.JWT(service_account.client_email, null, service_account.private_key, scopes);
+const jwt = new  google.auth.JWT(service_account.client_email, null, service_account.private_key, scopes);
 
 const view_id = '206636903';
 

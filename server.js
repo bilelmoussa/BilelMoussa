@@ -75,7 +75,7 @@ require('./config/passport')(passport);
 
 app.use('/api/user', user);
 app.use('/api/message', message);
-//app.use('/api/ga', GoogleAnalytics);
+app.use('/api/ga', GoogleAnalytics);
 
 /*
 app.use(express.static(path.join(__dirname, 'client/build')));
