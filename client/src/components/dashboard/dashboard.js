@@ -118,7 +118,7 @@ class Dashboard extends Component {
             return null;
         }
     }
-
+    
     componentDidUpdate(prevProps, prevState) {
         if(prevProps !== this.props){
             this.setState({
