@@ -6,7 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { logoutUser, GetGaUsers, GetGaNewUsers, GetGaPageViews, GetGaSessions, GetGaUsersMetrcis, handleDrawertoggle } from '../../actions/apiCalls';
 
 import NavigatonBar from '../../styleComponents/navigation/NavigatonBar';
-import LineChart from './charts/LineChart';
+import LineChart from './charts/LineChart/LineChart';
 import UsersCount from './charts/UsersCount';
 import NewUsersCount from './charts/NewUsersCount';
 import PageViewsCount from './charts/PageViewsCount';
@@ -138,22 +138,16 @@ class Dashboard extends Component {
     logoutUser(e){
         e.preventDefault();
         this.props.logoutUser(this.props.history);
-    }   
-
-    RenderLineChart = (data) =>{
-        const{Ga, SharedStyle} = this.props;
-        if(Ga.GaUsersMetrics.length > 0){
-            return(
-                <LineChart SharedStyle={SharedStyle} data={Ga.GaUsersMetrics} />
-            )
-        }else{
-            return null;
-        }
+    }
+    
+    
+    OnLineChartDateChange = () =>{
+        const{GaWeeklyDate} = this.state;
+        this.props.GetGaUsersMetrcis(GaWeeklyDate);
     }
 
     render(){
         const{classes, user, Ga, SharedStyle} = this.props;
-        
         return(
             <div className={classes.root}>
                 <NavigatonBar LogoutUser={this.logoutUser.bind(this)} handleDrawertoggle={this.props.handleDrawertoggle} user={user}  />
@@ -169,7 +163,7 @@ class Dashboard extends Component {
                         <SessionsCount Sessions={Ga.GaSessions}/>
                     </div>
                     <div className={classes.ChartBoxs}>
-                        {this.RenderLineChart()}
+                        <LineChart data={Ga.GaUsersMetrics} OnLineChartDateChange={this.OnLineChartDateChange} />
                         <GeoChart SharedStyle={SharedStyle} />
                     </div>
                 </main> 
