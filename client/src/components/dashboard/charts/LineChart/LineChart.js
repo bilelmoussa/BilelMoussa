@@ -9,9 +9,12 @@ import Chart from './Chart';
 
 const useStyles = (theme) => ({
     root: {
-      margin: '1rem auto',
-      display: "flex",
-      flexDirection: "column",
+        margin: '1rem auto 1rem 2rem',
+        display: "flex",
+        flexDirection: "column",
+        [theme.breakpoints.down('md')]: {
+            margin: '1rem auto',
+        },
     },
     FormControl: {
         margin: theme.spacing(2),
@@ -25,27 +28,41 @@ class LineChart extends Component {
     constructor(props){
         super(props);
         this.state={
-            width: 550,
-            height: 300,
+            width: 500,
+            height: 320,
             padding: 10,
             OpenDates: false,
             Dates: "last 28 days",
-            Monthly: "last 28 days",
-            Weekly: "last 7 days",
-            Day: "Yesterday",
+            LastYear: "last 365 days",
+            Last180Days: "last 180 days",
+            Last90Days: "last 90 days",
+            LastMonth: "last 28 days",
+            LastWeek: "last 7 days",
         }
         this.FigRef = React.createRef();
     }
 
     componentDidMount(){
-        
-    }
-
-
-    componentDidUpdate(prevProps, prevState) {
-        if(prevProps !== this.props){
-
+        if(window.innerWidth < 600){
+            const ScreenWidthNoNav = window.innerWidth - 53;
+            const ResPaperWidth = ScreenWidthNoNav * 0.95;
+            const ResHeight = ResPaperWidth * 0.7;
+            this.setState({width: ResPaperWidth, height: ResHeight});
         }
+
+
+        window.addEventListener("resize", () => {
+            if(window.innerWidth < 600 && window.innerWidth >= 300){
+                const ScreenWidthNoNav = window.innerWidth - 53;
+                const ResPaperWidth = ScreenWidthNoNav * 0.95;
+                const ResHeight = ResPaperWidth * 0.7;
+                this.setState({width: ResPaperWidth, height: ResHeight});
+            }else if(window.innerWidth >= 600){
+                const respWidth = 500;
+                const resHeight = 320;
+                this.setState({width: respWidth, height: resHeight})
+            }
+        });
     }
     
     handleCloseDates = () =>{
@@ -58,8 +75,9 @@ class LineChart extends Component {
 
     handleChange = event =>{
         this.setState({ Dates: event.target.value });
-        console.log(event.target.value);
-        this.props.OnLineChartDateChange();
+        if(event.target.value !== this.state.Dates){
+            this.props.OnLineChartDateChange(event.target.value);
+        }
     }
 
     RenderChart = () =>{
@@ -76,15 +94,14 @@ class LineChart extends Component {
 
     render(){
         const{classes} = this.props;
-        const{width, height, padding, OpenDates, Monthly, Weekly, Day, Dates} = this.state;
-
+        const{width, height, padding, OpenDates, LastYear, Last180Days, Last90Days, LastMonth, LastWeek, Dates} = this.state;
         return (
             <React.Fragment>
                 <Paper className={classes.root} style={{width: width, padding: padding}}>
                     <div>
                         <h3>Users</h3>
                     </div>
-                    <div style={{height: height, width: width}} >
+                    <div style={{minHeight: height}} >
                         {this.RenderChart()}
                     </div>
                     <div>
@@ -96,9 +113,11 @@ class LineChart extends Component {
                                 value={Dates}
                                 onChange={this.handleChange}
 						    >
-                                <MenuItem key={0} value={Monthly}>{Monthly}</MenuItem>
-                                <MenuItem key={1} value={Weekly}>{Weekly}</MenuItem>
-                                <MenuItem key={2} value={Day}>{Day}</MenuItem>
+                                <MenuItem key={0} value={LastYear}>{LastYear}</MenuItem>
+                                <MenuItem key={1} value={Last180Days}>{Last180Days}</MenuItem>
+                                <MenuItem key={2} value={Last90Days}>{Last90Days}</MenuItem>  
+                                <MenuItem key={3} value={LastMonth}>{LastMonth}</MenuItem>
+                                <MenuItem key={4} value={LastWeek}>{LastWeek}</MenuItem>
                             </Select>
                         </FormControl>
                     </div>

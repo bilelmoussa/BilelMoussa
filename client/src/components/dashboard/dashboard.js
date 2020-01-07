@@ -18,10 +18,10 @@ const styles = theme => ({
         display: 'flex'
     },
     MultiBoxs:{
-        padding: theme.spacing(3, 2),
+        padding: `${theme.spacing(1)}px 0`,
         display: "flex",
         flexDirection: "row",
-        margin: "1rem 0",
+        margin: "0.5rem 0",
         flexWrap: "wrap",
         maxWidth: 1200,
     },
@@ -34,14 +34,11 @@ const styles = theme => ({
     },
     content: {
         flexGrow: 1,
-        margin:  theme.spacing(2),
+        margin:  `${theme.spacing(2)}px 0`,
         overflow: "auto"
     },
-    dashRootH1:{
-        marginBottom: "1rem"
-    },
     dashH1:{
-        margin: "1rem 0",
+        margin: "0 1rem",
         font: "300 18px/14px 'Roboto',sans-serif",
         color: "#4a4a4a",
         lineHeight: "1.5em"
@@ -50,7 +47,7 @@ const styles = theme => ({
         display: "flex",
         flexDirection: "row",
         flexWrap: "wrap",
-        maxWidth: 2000
+        maxWidth: 1500,
     }
 })
 
@@ -60,15 +57,19 @@ class Dashboard extends Component {
     constructor(){
         super();
         this.state = {
+            minWidth: 0,
             IsLoggedIn: false,
             user: '',
-            GaMonthlyDate: {},
-            GaWeeklyDate: {}
+            GaLastYearDate: {},
+            GaLast180Days: {},
+            GaLast90Days: {},
+            GaLastMonthDate: {},
+            GaLastWeekDate: {},
         }
     }
 
     componentDidMount() {
-        this.setState({IsLoggedIn: this.props.user.IsLoggedIn})   
+        this.setState({IsLoggedIn: this.props.user.IsLoggedIn});   
 		if(!this.props.user.IsLoggedIn) { 
             this.props.history.push('/');
         }
@@ -76,38 +77,70 @@ class Dashboard extends Component {
             this.props.history.push('/');
         }
 
+        //Style for responsive
+        if(window.innerWidth < 600){
+            const ScreenWidthNoNav = window.innerWidth - 53;
+            this.setState({minWidth: ScreenWidthNoNav});
+        }
 
-        let last7days = moment().subtract(7, 'days').format("YYYY-MM-DD");
+        window.addEventListener("resize", () => {
+            if(window.innerWidth < 600 && window.innerWidth >= 300){
+                const ScreenWidthNoNav = window.innerWidth - 53;
+                this.setState({minWidth: ScreenWidthNoNav});
+            }
+        });
+        
+
+        let lastyear  = moment().subtract(365, 'days').format("YYYY-MM-DD");
+        let last180days = moment().subtract(180, 'days').format("YYYY-MM-DD");
+        let last90days = moment().subtract(90, 'days').format("YYYY-MM-DD");
         let lastMonth = moment().subtract(28, 'days').format("YYYY-MM-DD");
+        let last7days = moment().subtract(7, 'days').format("YYYY-MM-DD");
         let yesterday = moment().subtract(1, 'days').format("YYYY-MM-DD");
+        
+        const GaLastYearDate = {
+            startDate: lastyear,
+            endDate: yesterday
+        }
 
-        const GaMonthlyDate = {
+        const GaLast180Days = {
+            startDate: last180days,
+            endDate: yesterday
+        }
+
+        const GaLast90Days = {
+            startDate: last90days,
+            endDate: yesterday
+        }
+
+        const GaLastMonthDate = {
             startDate: lastMonth,
             endDate: yesterday
         }
 
-        const GaWeeklyDate = {
+        const GaLastWeekDate = {
             startDate: last7days,
             endDate: yesterday
         }
 
-        this.setState({GaMonthlyDate: GaMonthlyDate, GaWeeklyDate: GaWeeklyDate});
+        this.setState({GaLastMonthDate: GaLastMonthDate, GaLastWeekDate: GaLastWeekDate, GaLastYearDate: GaLastYearDate, GaLast180Days: GaLast180Days, GaLast90Days: GaLast90Days});
 
         if(this.props.Ga.GaUsers === '-'){
-            this.props.GetGaUsers(GaMonthlyDate);
+            this.props.GetGaUsers(GaLastMonthDate);
         }
         if(this.props.Ga.GaNewUsers === '-'){
-            this.props.GetGaNewUsers(GaWeeklyDate);
+            this.props.GetGaNewUsers(GaLastWeekDate);
         }
         if(this.props.Ga.GaPageViews === '-'){
-            this.props.GetGaPageViews(GaMonthlyDate);
+            this.props.GetGaPageViews(GaLastMonthDate);
         }
         if(this.props.Ga.GaSessions === '-'){
-            this.props.GetGaSessions(GaMonthlyDate);
+            this.props.GetGaSessions(GaLastMonthDate);
         }
         if(this.props.Ga.GaUsersMetrics.length === 0){
-            this.props.GetGaUsersMetrcis(GaMonthlyDate);
+            this.props.GetGaUsersMetrcis(GaLastMonthDate);
         }
+
         
     }
     
@@ -141,9 +174,23 @@ class Dashboard extends Component {
     }
     
     
-    OnLineChartDateChange = () =>{
-        const{GaWeeklyDate} = this.state;
-        this.props.GetGaUsersMetrcis(GaWeeklyDate);
+    OnLineChartDateChange = (date) =>{
+        const{GaLastWeekDate, GaLastMonthDate, GaLastYearDate, GaLast180Days, GaLast90Days} = this.state;
+        if(date === 'last 365 days'){
+            this.props.GetGaUsersMetrcis(GaLastYearDate);
+        }
+        if(date === 'last 180 days'){
+            this.props.GetGaUsersMetrcis(GaLast180Days);
+        }
+        if(date === 'last 90 days'){
+            this.props.GetGaUsersMetrcis(GaLast90Days);
+        }
+        if(date === 'last 28 days'){
+            this.props.GetGaUsersMetrcis(GaLastMonthDate);
+        }
+        if(date === 'last 7 days'){
+            this.props.GetGaUsersMetrcis(GaLastWeekDate);
+        }
     }
 
     render(){
@@ -162,7 +209,7 @@ class Dashboard extends Component {
                         <PageViewsCount PageViews={Ga.GaPageViews}/>
                         <SessionsCount Sessions={Ga.GaSessions}/>
                     </div>
-                    <div className={classes.ChartBoxs}>
+                    <div className={classes.ChartBoxs} style={{minWidth: this.state.minWidth}}>
                         <LineChart data={Ga.GaUsersMetrics} OnLineChartDateChange={this.OnLineChartDateChange} />
                         <GeoChart SharedStyle={SharedStyle} />
                     </div>

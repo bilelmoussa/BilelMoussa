@@ -3,7 +3,6 @@ import * as d3 from "d3";
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 
-
 const useStyles = (theme) => ({
     LineChartSvg:{
         overflow: 'visible',
@@ -46,10 +45,13 @@ export class Chart extends Component {
 
     constructor(props){
         super(props);
+        this.state = {
+            data: []
+        }
         this.FigRef = React.createRef();
     }
 
-    componentDidMount() {
+    RenderChart = (preventAnimation) =>{
         const{data, classes, width, height, padding} = this.props;
         
         const newPadding = (padding  * 2) + 20;
@@ -61,7 +63,8 @@ export class Chart extends Component {
             d.metrics = parseInt(d.metrics);
             return {dimensions: d.dimensions, metrics: d.metrics };
         })
-
+        
+        this.setState({data: newData});
 
         const xScale = d3.scaleTime()
                         .domain(d3.extent(newData, function(d) { return d.dimensions; }))
@@ -74,7 +77,7 @@ export class Chart extends Component {
 
         const xAxis = d3.axisBottom(xScale)
                         .ticks(5)
-                        .tickFormat(d3.timeFormat("%d"));
+                        .tickFormat(d3.timeFormat("%b %d"));
 
         const yAxis = d3.axisRight(yScale)
                         .ticks(5);
@@ -115,7 +118,6 @@ export class Chart extends Component {
             .style('transform', `translateX(${ChartWidth}px)`)
             .call(yAxis);
             
-            
         chart
             .append("path")
             .data([newData])
@@ -128,14 +130,50 @@ export class Chart extends Component {
         let path = svg.select('.line');
         const pathLength = path.node().getTotalLength();
 
-        path
-            .attr("stroke-dashoffset", pathLength)
-            .attr("stroke-dasharray", pathLength)
-            .transition()
-            .duration(2500)
-            .delay(1000)
-            .attr("stroke-dashoffset", 0);
+        if(!preventAnimation){
+            path
+                .attr("stroke-dashoffset", pathLength)
+                .attr("stroke-dasharray", pathLength)
+                .transition()
+                .duration(2500)
+                .delay(1000)
+                .attr("stroke-dashoffset", 0);
+        }
 
+    }
+
+    ReRenderChart = () =>{
+        const svg =  d3.select(`#graph svg`);
+        svg.selectAll('path').data([this.state.data]).exit().remove();
+        svg.remove();
+        this.RenderChart(false);
+    }
+
+    ReStyleChart = () =>{
+        let resizedFn;
+        clearTimeout(resizedFn);
+
+        resizedFn = setTimeout(() => {
+            const svg =  d3.select(`#graph svg`);
+            svg.selectAll('path').data([this.state.data]).exit().remove();
+            svg.remove();
+            this.RenderChart(true);
+        }, 200)
+    }
+
+    componentDidMount() {
+        this.RenderChart(false);
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if(prevProps !== this.props){
+            if(prevProps.data !== this.props.data){
+                this.ReRenderChart();
+            }
+            if(prevProps.width !== this.props.width){
+                this.ReStyleChart();
+            }
+        }
     }
 
     render() {

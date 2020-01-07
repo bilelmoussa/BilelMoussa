@@ -77,14 +77,14 @@ app.use('/api/user', user);
 app.use('/api/message', message);
 app.use('/api/ga', GoogleAnalytics);
 
-/*
+
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 
 app.get('*', (req,res) =>{
     res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
-*/
+
 
 // Port    
 const port = process.env.PORT || 5000;

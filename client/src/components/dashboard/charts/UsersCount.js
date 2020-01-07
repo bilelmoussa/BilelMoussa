@@ -13,12 +13,15 @@ const useStyles = makeStyles(theme => ({
     root: {
         minWidth: 200,
         height: 240,   
-        padding: theme.spacing(3, 2),
-        margin: '1rem auto',
+        padding: theme.spacing(2, 2),
+        margin: '1rem auto 1rem 2rem',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-around',
         borderRadius: 10,
+        [theme.breakpoints.down('md')]: {
+            margin: '1rem auto',
+        },
     },
     cardInner:{
         display: "flex",
