@@ -43,7 +43,6 @@ html {
 
 /* ------------------- Dashboard Chart ---------------- */
 
-
 .overlay {
   fill: none;
   pointer-events: all;
@@ -65,10 +64,101 @@ html {
 
 .tooltip-date, .tooltip-likes {
   font-weight: bold;
+  color: #222;
 }
 
 
 
+/* Tooltip CSS */
+.d3-tip {
+  line-height: 1.5;
+  font-weight: 400;
+  font-family:"avenir next", Arial, sans-serif;
+  padding: 6px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #74c3ff;
+  border-radius: 1px;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.d3-tip-bar-geo{
+  line-height: 1.5;
+  font-weight: 400;
+  font-family:"avenir next", Arial, sans-serif;
+  padding: 6px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #74c3ff;
+  border-radius: 1px;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after, .d3-tip-bar-geo:after {      
+  box-sizing: border-box;
+  display: inline;
+  font-size: 8px;
+  width: 100%;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  pointer-events: none;   
+}
+  
+/* Northward tooltips */
+.d3-tip.n:after, .d3-tip-bar-geo.n:after {
+  content: "\25BC";
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+  text-align: center;
+}
+  
+/* Eastward tooltips */
+.d3-tip.e:after, .d3-tip-bar-geo.e:after {
+  content: "\25C0";
+  margin: -4px 0 0 0;
+  top: 50%;
+  left: -8px;
+}
+
+/* Southward tooltips */
+.d3-tip.s:after, .d3-tip-bar-geo.s:after {
+  content: "\25B2";
+  margin: 0 0 1px 0;
+  top: -8px;
+  left: 0;
+  text-align: center;
+}
+  
+/* Westward tooltips */
+.d3-tip.w:after, .d3-tip-bar-geo.w:after {
+  content: "\25B6";
+  margin: -4px 0 0 -1px;
+  top: 50%;
+  left: 100%;
+}
+
+/*    text{
+        pointer-events:none;
+      }*/
+
+.d3-tip .details, .d3-tip-bar-geo .details{
+    color:white;
+}
+
+.y-axis path, .y-axis line{
+  opacity: 0;
+  color: #ddd;
+}
+.y-axis text{
+  font-weight: bold;
+  font-size: 12px;
+}  
+.bar{
+  fill: #38a8fd;
+}
 
 
 

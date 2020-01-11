@@ -3,15 +3,14 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { withStyles } from '@material-ui/core/styles';
-import { logoutUser, GetGaUsers, GetGaNewUsers, GetGaPageViews, GetGaSessions, GetGaUsersMetrcis, handleDrawertoggle } from '../../actions/apiCalls';
-
+import { logoutUser, GetGaUsers, GetGaNewUsers, GetGaPageViews, GetGaSessions, GetGaUsersMetrcis, GetGaSessionsByCountry } from '../../actions/apiCalls';
 import NavigatonBar from '../../styleComponents/navigation/NavigatonBar';
 import LineChart from './charts/LineChart/LineChart';
 import UsersCount from './charts/UsersCount';
 import NewUsersCount from './charts/NewUsersCount';
 import PageViewsCount from './charts/PageViewsCount';
 import SessionsCount from './charts/SessionsCount';
-import GeoChart from './charts/GeoChart';
+import GeoChart from './charts/GeoChart/GeoChart';
 
 const styles = theme => ({
     root:{
@@ -48,6 +47,7 @@ const styles = theme => ({
         flexDirection: "row",
         flexWrap: "wrap",
         maxWidth: 1500,
+        overflow: "auto"
     }
 })
 
@@ -129,7 +129,7 @@ class Dashboard extends Component {
             this.props.GetGaUsers(GaLastMonthDate);
         }
         if(this.props.Ga.GaNewUsers === '-'){
-            this.props.GetGaNewUsers(GaLastWeekDate);
+            this.props.GetGaNewUsers(GaLastMonthDate);
         }
         if(this.props.Ga.GaPageViews === '-'){
             this.props.GetGaPageViews(GaLastMonthDate);
@@ -139,6 +139,9 @@ class Dashboard extends Component {
         }
         if(this.props.Ga.GaUsersMetrics.length === 0){
             this.props.GetGaUsersMetrcis(GaLastMonthDate);
+        }
+        if(this.props.Ga.GaSessionsByCountry.length === 0){
+            this.props.GetGaSessionsByCountry(GaLastMonthDate)
         }
 
         
@@ -193,11 +196,30 @@ class Dashboard extends Component {
         }
     }
 
+    OnGeoChartDateChange = (date) =>{
+        const{GaLastWeekDate, GaLastMonthDate, GaLastYearDate, GaLast180Days, GaLast90Days} = this.state;
+        if(date === 'last 365 days'){
+            this.props.GetGaSessionsByCountry(GaLastYearDate);
+        }
+        if(date === 'last 180 days'){
+            this.props.GetGaSessionsByCountry(GaLast180Days);
+        }
+        if(date === 'last 90 days'){
+            this.props.GetGaSessionsByCountry(GaLast90Days);
+        }
+        if(date === 'last 28 days'){
+            this.props.GetGaSessionsByCountry(GaLastMonthDate);
+        }
+        if(date === 'last 7 days'){
+            this.props.GetGaSessionsByCountry(GaLastWeekDate);
+        }
+    }
+
     render(){
-        const{classes, user, Ga, SharedStyle} = this.props;
+        const{classes, user, Ga} = this.props;
         return(
             <div className={classes.root}>
-                <NavigatonBar LogoutUser={this.logoutUser.bind(this)} handleDrawertoggle={this.props.handleDrawertoggle} user={user}  />
+                <NavigatonBar LogoutUser={this.logoutUser.bind(this)} user={user}  />
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
                     <div className={classes.dashRootH1}>
@@ -211,7 +233,7 @@ class Dashboard extends Component {
                     </div>
                     <div className={classes.ChartBoxs} style={{minWidth: this.state.minWidth}}>
                         <LineChart data={Ga.GaUsersMetrics} OnLineChartDateChange={this.OnLineChartDateChange} />
-                        <GeoChart SharedStyle={SharedStyle} />
+                        <GeoChart data={Ga.GaSessionsByCountry} OnGeoChartDateChange={this.OnGeoChartDateChange} />
                     </div>
                 </main> 
             </div>
@@ -228,17 +250,15 @@ Dashboard.protoType = {
     GetGaPageViews: PropTypes.func.isRequired,
     GetGaSessions: PropTypes.func.isRequired,
     GetGaUsersMetrcis: PropTypes.func.isRequired,
-    handleDrawertoggle: PropTypes.func.isRequired,
-    SharedStyle: PropTypes.object.isRequired
+    GetGaSessionsByCountry: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => ({
     user: state.user,
     Ga: state.Ga,
-    SharedStyle: state.SharedStyle
 });
 
-export default connect(mapStateToProps, {logoutUser, GetGaUsers, GetGaNewUsers, GetGaPageViews, GetGaSessions, GetGaUsersMetrcis, handleDrawertoggle})(withStyles(styles)(Dashboard));
+export default connect(mapStateToProps, {logoutUser, GetGaUsers, GetGaNewUsers, GetGaPageViews, GetGaSessions, GetGaUsersMetrcis, GetGaSessionsByCountry})(withStyles(styles)(Dashboard));
 
 
 

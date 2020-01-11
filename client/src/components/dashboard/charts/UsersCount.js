@@ -22,6 +22,12 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.down('md')]: {
             margin: '1rem auto',
         },
+        [theme.breakpoints.down('xs')]: {
+            minWidth: 140,
+            height: 160,
+            padding: theme.spacing(1, 1),
+            margin: '0.5rem auto',
+        }, 
     },
     cardInner:{
         display: "flex",
@@ -31,11 +37,17 @@ const useStyles = makeStyles(theme => ({
             marginTop: "1rem",
             fontSize: 18,
             letterSpacing: 1,
+            [theme.breakpoints.down('xs')]: {
+                fontSize: 14,
+            },
         }
     },
     usersSvg:{
         width: 80,
-        margin: "0 auto"
+        margin: "0 auto",
+        [theme.breakpoints.down('xs')]: {
+            width: 40,
+        }, 
     }
 }));
 

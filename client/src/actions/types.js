@@ -7,4 +7,4 @@ export const GA_NEW_USERS = 'GA_NEW_USERS';
 export const GA_PAGE_VIEWS = 'GA_PAGE_VIEWS';
 export const GA_SESSIONS = 'GA_SESSIONS';
 export const GA_USERS_METRICS = 'GA_USERS_METRICS';
-export const DRAWER_CLOSED = 'DRAWER_CLOSED'
+export const SESSIONS_BY_COUNTRY = 'SESSIONS_BY_COUNTRY'

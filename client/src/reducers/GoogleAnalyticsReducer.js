@@ -1,4 +1,4 @@
-import { GA_USERS, GA_NEW_USERS, GA_PAGE_VIEWS, GA_SESSIONS, GA_USERS_METRICS } from '../actions/types';
+import { GA_USERS, GA_NEW_USERS, GA_PAGE_VIEWS, GA_SESSIONS, GA_USERS_METRICS, SESSIONS_BY_COUNTRY } from '../actions/types';
 
 const initialState = {
     GaUsers: '-',
@@ -6,6 +6,7 @@ const initialState = {
     GaPageViews: '-',
     GaSessions: '-',
     GaUsersMetrics: [],
+    GaSessionsByCountry: []
 }
 
 export default function(state = initialState, action){
@@ -19,7 +20,9 @@ export default function(state = initialState, action){
         case GA_SESSIONS:
             return { ...state, GaSessions: action.payload };
         case GA_USERS_METRICS:
-            return { ...state, GaUsersMetrics: action.payload };       
+            return { ...state, GaUsersMetrics: action.payload };
+        case SESSIONS_BY_COUNTRY:
+            return { ...state, GaSessionsByCountry: action.payload}           
         default:
             return state;    
     }

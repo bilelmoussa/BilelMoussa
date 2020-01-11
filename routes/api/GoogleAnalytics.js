@@ -129,4 +129,28 @@ router.get('/usersmetrics', (req, res, next)=>{
     .catch(e => res.status(500).json({success: false, errors: e}));
 })
 
+router.get('/sessionsbycountry', (req, res, next)=>{
+    const startDate = req.query.startDate || "";
+    const endDate = req.query.endDate || "";
+
+    let basic_report = {
+        'reportRequests': [
+            {
+                'viewId': view_id,
+                'dateRanges': [{'startDate': startDate, 'endDate': endDate}],
+                'metrics': [{'expression': 'ga:sessions'}],
+                'dimensions': [{'name': 'ga:country'}],
+                'orderBys': [
+                    {'fieldName': 'ga:country'}
+                ]
+            }
+        ]
+    };
+
+    getReports(basic_report)
+    .then(response => res.status(200).json({success: true, data: response.data.reports[0].data }))
+    .catch(e =>  res.status(400).json({success: false, errors: e}));
+})
+
+
 module.exports = router;

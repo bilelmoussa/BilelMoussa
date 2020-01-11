@@ -12,15 +12,19 @@ const useStyles = (theme) => ({
         margin: '1rem auto 1rem 2rem',
         display: "flex",
         flexDirection: "column",
-        [theme.breakpoints.down('md')]: {
+        [theme.breakpoints.down('lg')]: {
             margin: '1rem auto',
         },
+        maxHeight: 420
     },
     FormControl: {
-        margin: theme.spacing(2),
+        margin: theme.spacing(1),
         minWidth: 120,
     },
-  });
+    LineChartHeader:{
+        fontSize: "1rem"
+    }
+});
 
 
 class LineChart extends Component {
@@ -28,7 +32,7 @@ class LineChart extends Component {
     constructor(props){
         super(props);
         this.state={
-            width: 500,
+            width: 600,
             height: 320,
             padding: 10,
             OpenDates: false,
@@ -39,30 +43,28 @@ class LineChart extends Component {
             LastMonth: "last 28 days",
             LastWeek: "last 7 days",
         }
-        this.FigRef = React.createRef();
     }
 
     componentDidMount(){
-        if(window.innerWidth < 600){
+        if(window.innerWidth < 700){
             const ScreenWidthNoNav = window.innerWidth - 53;
             const ResPaperWidth = ScreenWidthNoNav * 0.95;
-            const ResHeight = ResPaperWidth * 0.7;
+            const ResHeight = ResPaperWidth * 0.5;
             this.setState({width: ResPaperWidth, height: ResHeight});
         }
 
-
         window.addEventListener("resize", () => {
-            if(window.innerWidth < 600 && window.innerWidth >= 300){
+            if(window.innerWidth < 700 && window.innerWidth >= 300){
                 const ScreenWidthNoNav = window.innerWidth - 53;
                 const ResPaperWidth = ScreenWidthNoNav * 0.95;
-                const ResHeight = ResPaperWidth * 0.7;
+                const ResHeight = ResPaperWidth * 0.5;
                 this.setState({width: ResPaperWidth, height: ResHeight});
-            }else if(window.innerWidth >= 600){
-                const respWidth = 500;
+            }else if(window.innerWidth >= 700){
+                const respWidth = 600;
                 const resHeight = 320;
                 this.setState({width: respWidth, height: resHeight})
             }
-        });
+        }); 
     }
     
     handleCloseDates = () =>{
@@ -99,7 +101,7 @@ class LineChart extends Component {
             <React.Fragment>
                 <Paper className={classes.root} style={{width: width, padding: padding}}>
                     <div>
-                        <h3>Users</h3>
+                        <p className={classes.LineChartHeader} >Users</p>
                     </div>
                     <div style={{minHeight: height}} >
                         {this.RenderChart()}

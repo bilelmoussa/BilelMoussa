@@ -139,9 +139,6 @@ class NavigatonBar extends Component {
     };
     
     handleDrawerOpen = () =>{
-        setTimeout(() => {
-            this.props.handleDrawertoggle(true);
-        }, 195);
         this.setState({open: true});
     }
 
@@ -150,9 +147,6 @@ class NavigatonBar extends Component {
     };
 
     handleDrawerClose = () =>{
-        setTimeout(() => {
-            this.props.handleDrawertoggle(false);
-        }, 225);
         this.setState({open: false})
     }
 
@@ -267,7 +261,6 @@ NavigatonBar.propTypes = {
     classes: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired,
     LogoutUser: PropTypes.func.isRequired,
-    handleDrawertoggle: PropTypes.func.isRequired
 }
 
 export default withStyles(styles)(NavigatonBar);

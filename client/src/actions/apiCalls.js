@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { MSG_RES, IPINFO, SET_CURRENT_USER, LOG_ERRORS, GA_USERS, GA_NEW_USERS, GA_PAGE_VIEWS, GA_SESSIONS, GA_USERS_METRICS, DRAWER_CLOSED} from './types';
+import { MSG_RES, IPINFO, SET_CURRENT_USER, LOG_ERRORS, GA_USERS, GA_NEW_USERS, GA_PAGE_VIEWS, GA_SESSIONS, GA_USERS_METRICS, SESSIONS_BY_COUNTRY} from './types';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from '../setAuthToken';
 
@@ -151,9 +151,16 @@ export const GetGaUsersMetrcis= date => dispatch =>{
     })
 }
 
-export const handleDrawertoggle = action => dispatch =>{
-    dispatch({
-        type: DRAWER_CLOSED,
-        payload: action
+
+export const GetGaSessionsByCountry = date => dispatch =>{
+    axios.get(`/api/ga/sessionsbycountry?startDate=${date.startDate}&endDate=${date.endDate}`)
+    .then(res =>{
+        dispatch({
+            type: SESSIONS_BY_COUNTRY,
+            payload: [res.data.data]
+        })
+    })
+    .catch(err=>{
+        console.log(err)
     })
 }

@@ -48,7 +48,6 @@ export class Chart extends Component {
         this.state = {
             data: []
         }
-        this.FigRef = React.createRef();
     }
 
     RenderChart = (preventAnimation) =>{
@@ -62,8 +61,11 @@ export class Chart extends Component {
             d.dimensions = new Date(d.dimensions);
             d.metrics = parseInt(d.metrics);
             return {dimensions: d.dimensions, metrics: d.metrics };
-        })
-        
+        });
+
+        const bisectDate = d3.bisector(function(d) { return d.dimensions; }).left;
+        const dateFormatter = d3.timeFormat("%m/%d/%y");
+
         this.setState({data: newData});
 
         const xScale = d3.scaleTime()
@@ -96,8 +98,9 @@ export class Chart extends Component {
                         .attr("width", ChartWidth)
                         .attr("class", `${classes.LineChartSvg}`);
 
+
         const chart = svg.append("g");
-        
+
         chart
             .append("g")			
             .attr("class", classes.grid)
@@ -117,7 +120,7 @@ export class Chart extends Component {
             .attr("class", classes.yAxis)
             .style('transform', `translateX(${ChartWidth}px)`)
             .call(yAxis);
-            
+
         chart
             .append("path")
             .data([newData])
@@ -125,7 +128,8 @@ export class Chart extends Component {
             .attr('d',  Line)
             .attr('fill', 'none')
             .attr('stroke-width', '2px')
-            .attr('stroke', '#38a8fd'); 
+            .attr('stroke', '#38a8fd')
+
             
         let path = svg.select('.line');
         const pathLength = path.node().getTotalLength();
@@ -140,6 +144,60 @@ export class Chart extends Component {
                 .attr("stroke-dashoffset", 0);
         }
 
+        const focus = svg.append("g")
+            .attr("class", "focus")
+            .style("display", "none");
+
+        focus.append("circle")
+            .attr("r", 5);
+
+        focus.append("rect")
+            .attr("class", "tooltip")
+            .attr("width", 100)
+            .attr("height", 50)
+            .attr("x", 10)
+            .attr("y", -22)
+            .attr("rx", 4)
+            .attr("ry", 4);
+
+        focus.append("text")
+            .attr("class", "tooltip-date")
+            .attr("x", 18)
+            .attr("y", -2);
+
+        focus.append("text")
+            .attr("x", 18)
+            .attr("y", 18)
+            .text("Users:");
+
+        focus.append("text")
+            .attr("class", "tooltip-users")
+            .attr("x", 60)
+            .attr("y", 18);
+
+        svg.append("rect")
+            .attr("class", "overlay")
+            .attr("width", ChartWidth)
+            .attr("height", ChartHeight)
+            .on("mouseover", function() { focus.style("display", null); })
+            .on("mouseout", function() { focus.style("display", "none"); })
+            .on("mousemove", mousemove);
+        
+        function mousemove(){
+            let x0 = xScale.invert(d3.mouse(this)[0]);
+            let i = bisectDate(newData, x0, 1);
+            let d0 = newData[i - 1];
+            let d1 = newData[i];
+            let d = d0;
+
+            if(d1){
+                d = x0 - d0.dimensions > d1.dimensions - x0 ? d1 : d0;
+            }
+
+            focus.attr("transform", "translate(" + xScale(d.dimensions) + "," + yScale(d.metrics) + ")");
+            focus.select(".tooltip-date").text(dateFormatter(d.dimensions));
+            focus.select(".tooltip-users").text(d.metrics);
+        }
     }
 
     ReRenderChart = () =>{
@@ -163,6 +221,7 @@ export class Chart extends Component {
 
     componentDidMount() {
         this.RenderChart(false);
+
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -180,7 +239,7 @@ export class Chart extends Component {
         const{classes} = this.props;
 
         return (
-            <figure id="graph" className={classes.LineChart} ref={this.FigRef}>
+            <figure id="graph" className={classes.LineChart}>
 
             </figure>   
         )

@@ -13,7 +13,7 @@ const NewUsersSvg = props => (
 const useStyles = makeStyles(theme => ({
     root: {
         minWidth: 200,
-        height: 240,   
+        height: 240,  
         padding: theme.spacing(2, 2),
         margin: '1rem auto 1rem 2rem',
         display: 'flex',
@@ -23,6 +23,12 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.down('md')]: {
             margin: '1rem auto',
         },
+        [theme.breakpoints.down('xs')]: {
+            minWidth: 140,
+            height: 160,
+            padding: theme.spacing(1, 1),
+            margin: '0.5rem auto',
+        }, 
     },
     cardInner:{
         display: "flex",
@@ -33,14 +39,17 @@ const useStyles = makeStyles(theme => ({
             fontSize: 18,
             letterSpacing: 1,
             textAlign: "center",
-            '& small':{
-                fontSize: 11,
-            }
+            [theme.breakpoints.down('xs')]: {
+                fontSize: 14,
+            },
         }
     },
     newUsersSvg:{
         width: 80,
-        margin: "0 auto"
+        margin: "0 auto",
+        [theme.breakpoints.down('xs')]: {
+            width: 40,
+        }, 
     }
 }));
 
@@ -53,7 +62,7 @@ export default function UsersCount(props) {
             <Paper className={classes.root}>
                     <div className={classes.cardInner}>
                         <NewUsersSvg className={classes.newUsersSvg}/>
-                        <p>New Users <br/><small>(Last 7 days)</small></p>
+                        <p>New Users <br/></p>
                         <p>{props.NewUsers}</p> 
                     </div>
             </Paper>
